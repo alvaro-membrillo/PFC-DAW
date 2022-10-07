@@ -32,13 +32,13 @@ Además los usuarios que hayan llegado a un acuerdo con otros podrán valorar el
 ## Definir el objetivo de la aplicación
 
 - **¿Qué va a hacer la aplicación?**
-- Facilitar el contacto entre profesionales.
+  Facilitar el contacto entre profesionales.
 - **¿Cuál es su atractivo principal?**
-- La sencillez en cuanto a su funcionamiento y su eficacia para publicitar el trabajo de los autónomos.
+  La sencillez en cuanto a su funcionamiento y su eficacia para publicitar el trabajo de los autónomos.
 - **¿Qué problema concreto va a resolver?**
-- La falta de publicidad que sufren muchos autónomos y la facilidad para contratar servicios por parte de cualquier usuario.
+  La falta de publicidad que sufren muchos autónomos y la facilidad para contratar servicios por parte de cualquier usuario.
 - **¿Qué necesidad va a cubrir?**
-- La dificultad para contactar con profesionales especializados y la falta de exposición que tienen muchos para poder llevar a cabo su negocio como trabajador por cuenta propia.
+  La dificultad para contactar con profesionales especializados y la falta de exposición que tienen muchos para poder llevar a cabo su negocio como trabajador por cuenta propia.
 
 ## Prototipo de la Interfaz del proyecto
 
