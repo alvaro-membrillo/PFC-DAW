@@ -25,18 +25,20 @@ El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](
 
 ## Breve descripción del proyecto
 
-Si ya tienes una idea para tu aplicación, explícala brevemente. Si no es así, lo que realmente necesitas es **buscar un problema o necesidad a la que darle solución**, y estos **están por todas partes**. Así que trata de buscar problemas o necesidades en tu vida diaria y realiza una lista. Una vez que tengas una lista exhaustiva, ya puedes empezar a pensar en **cómo puedes resolverlos**.
+Se trata de una plataforma que para facilitar el contacto entre profesionales por cuenta propia, en la que los usuarios podrán subir ofertas de trabajo, chatear con otros mediante sus publicaciones y llegar a acuerdos. Los usuarios podrán modificar su información y sus publicaciones, y tendrán acceso a un calendario con sus eventos y un filtro de búsqueda avanzado de publicaciones.
 
-En este apartado el alumno debe hacer una breve descripción del proyecto que vaya a realizar. Esta descripción no será ua descripción detallada, será una presentación general con no más de 10 líneas.
+Además los usuarios que hayan llegado a un acuerdo con otros podrán valorar el trabajo del usuario contratado mediante una reseña, que será visible en el perfil de dicho usuario.
 
 ## Definir el objetivo de la aplicación
 
-**Tener una gran idea** o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes **definir claramente el propósito y la misión de la aplicación web**:
-
 - **¿Qué va a hacer la aplicación?**
+- Facilitar el contacto entre profesionales.
 - **¿Cuál es su atractivo principal?**
+- La sencillez en cuanto a su funcionamiento y su eficacia para publicitar el trabajo de los autónomos.
 - **¿Qué problema concreto va a resolver?**
+- La falta de publicidad que sufren muchos autónomos y la facilidad para contratar servicios por parte de cualquier usuario.
 - **¿Qué necesidad va a cubrir?**
+- La dificultad para contactar con profesionales especializados y la falta de exposición que tienen muchos para poder llevar a cabo su negocio como trabajador por cuenta propia.
 
 ## Prototipo de la Interfaz del proyecto
 

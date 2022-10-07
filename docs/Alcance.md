@@ -1,20 +1,16 @@
 ### Introducción
-Esta aplicación pretende gestionar los datos de colaboradores, beneficiarios y talleres que organiza una asociación. Será una herramienta útil para conocer la demanda de los beneficiaros y la disponibilidad de colaboradores que puedan atender esa demanda.
+Esta aplicación pretende gestionar los datos de trabajadores autónomos y sus anuncios, con el objetivo de facilitar la tarea de promocionarse y permitir a otros usuarios un contacto más directo, cercano y la posibilidad de contratar sus servicios de forma sencilla.
 
 ### Alcance del proyectos
 # Tareas que mi proyecto llevará a cabo:
-- Permite logarse a los beneficiarios y consultar los talleres disponibles, plazas, horarios, etc.
-- Los beneficiarios podrán solicitar la matriculación en alguno de los talleres.
-- Los colaboradores podrán logarse y cambiar sus características, nuevas habilidades, modificar su disponibilidad, etc
-- Remitirá correo electrónico a los beneficiarios con los datos de la reserva que han hecho.
-- Se podrán sacar listas de los alumnos de cada taller.
-- Se podrá sacar un listado de los colaboradores que pueden impartir un taller en un horario determinado.
-- Añadir nuevos talleres, modificar los existentes.
-- Imprimirá diplomas con los datos de los alumnos.
-- Permitirá enviar correos masivos con ofertas de nuevos talleres.
-- Permitirá que los alumnos valoren cada uno de los talleres.
-* Se habilitará un blog para que los usuarios puedan realizar comentarios.
-- Se generará una memoria anual de todos los talleres realizados.
-- Permitirá establecer los recursos necesarios para cada taller
-- Controlará la preferencia de asignación de talleres en función del número de veces que ya ha disfrutado del servicio.
+- Permite logarse a los usuarios y consultar los anuncios publicados, chats, calendario, etc.
+- Permitirá darse de alta como usuario, eliminar la propia cuenta.
+- Permitirá a los usuarios administradores el control sobre el resto de usuarios, borrar sus cuentas...
+- Permitirá el inicio de sesión con las credenciles email y password para los usuarios registrados.
+- Los usuarios podrán solicitar acuerdos a otros usuarios mediante los anuncios que hayan publicado.
+- Los usuarios podrán logarse y cambiar sus características, descripción, modificar su disponibilidad, etc
+- Se podrán sacar listas de los anuncios contratados y filtrar todos los anuncios para realizar búsquedas avanzadas.
+- Añadir nuevos anuncios, modificar los existentes.
+- Mostrará reseñas de los acuerdos que hayan sido valorados en el perfil del usuario autónomo.
+- Permitirá que los usuarios valoren los anuncios contratados.
 - .....
