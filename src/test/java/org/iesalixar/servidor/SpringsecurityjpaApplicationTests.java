@@ -1,10 +1,10 @@
-package com.example.demo;
+package org.iesalixar.servidor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TodoempleoApplicationTests {
+class SpringsecurityjpaApplicationTests {
 
 	@Test
 	void contextLoads() {

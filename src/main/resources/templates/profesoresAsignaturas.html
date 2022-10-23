@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Profesores')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>			
+			<div class="col-8">
+				<!--<h4 class="text-center mt-3" th:text="'Profesor de:'+ ${departamento.getNombre()}"></h4>-->
+				<table class="table table-stripped table-hover mt-5">
+					<thead class="table-light">
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Creditos</th>
+						<th>Tipo</th>
+						<th>Curso</th>
+						<th>Cuatrimestre</th>
+						<th></th>
+					</tr>
+					</thead>					
+					<tbody>
+					 <tr th:each="a : ${asignatura.getAsignaturas()}">
+					 	<td th:text="${a.getId()}"></td>
+					 	<td th:text="${a.getNombre()}"></td>
+					 	<td th:text="${a.getCreditos()}"></td>
+					 	<td th:text="${a.getTipo()}"></td>
+					 	<td th:text="${a.getCurso()}"></td>
+					 	<td th:text="${a.getCuatrimestre()}"></td>					 	
+					 </tr>
+					</tbody>
+				</table>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.students')"></footer>
+		</div>
+	</div>
+</body>
+</html>

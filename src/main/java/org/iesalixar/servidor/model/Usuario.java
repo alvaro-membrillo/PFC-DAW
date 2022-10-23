@@ -1,36 +1,48 @@
-package com.example.demo.model;
+package org.iesalixar.servidor.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
-@Table(name = "Usuario")
+@Table(name="usuarios")
 public class Usuario implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "usuario", unique = true, nullable = false)
+	
+	@Column(name="usuario",unique=true, nullable=false)
 	private String userName;
-
-	@Column(nullable = false)
+	
+	@Column(nullable=false)
 	private String password;
-
-	@Column(unique = true, nullable = false)
+	
+	@Column(unique=true,nullable=false)
 	private String email;
-
-	@Column(nullable = false)
+	
+	@Column(nullable=false)
 	private String nombre;
-
-	@Column(nullable = false)
+	
+	@Column(nullable=false)
 	private String apellidos;
-
-	@Column(nullable = false)
+	
+	@Column(nullable=false)
 	private String role;
-
-	@Column(nullable = false, columnDefinition = "BOOLEAN")
+	
+	@Column(nullable=false,columnDefinition="BOOLEAN")	
 	private boolean activo;
-
+	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
@@ -41,7 +53,7 @@ public class Usuario implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}	
 
 	public String getUserName() {
 		return userName;
@@ -98,25 +110,6 @@ public class Usuario implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(activo, apellidos, email, id, nombre, password, role, userName);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return activo == other.activo && Objects.equals(apellidos, other.apellidos)
-				&& Objects.equals(email, other.email) && Objects.equals(id, other.id)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password)
-				&& Objects.equals(role, other.role) && Objects.equals(userName, other.userName);
-	}
 	
+
 }

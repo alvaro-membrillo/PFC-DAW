@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Departments')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<h1 class="text-center mt-3">Profesores de la Universidad</h1>
+			<div class="col-8">
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nif</th>
+							<th>Nombre</th>
+							<th>Apellidos1</th>
+							<th>Departamento</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${profesores}">
+							<td th:text="${p.getId()}"></td>
+							<td th:text="${p.getNif()}"></td>
+							<td th:text="${p.getNombre()}"></td>
+							<td th:text="${p.getApellido1()}"></td>
+							<!--<td th:text="${p.getDepartamento().getNombre()}"></td>-->
+							<!--<td th:text="${p.getDepartamento().getNombre()}"></td>-->
+							<td th:text="(${p.departamento} != null) ? |${p.departamento.nombre} | : ''"></td>
+							
+							<td><a th:href="@{'/profesores/asignaturas?codigo='+${p.getId()}}">
+								<i class="bi bi-eye-fill"></i></a>
+							</td>
+
+
+							<!--<td><a th:href="@{'/departments/edit?dpto='+${d.getId()}}"><i
+									class="bi bi-pen-fill"></i></a> <a
+								th:href="@{'/departments/profesores?dpto='+${d.getId()}}"><i
+									class="bi bi-eye-fill"></i></a> <a
+								th:href="@{/departments/addProfesor}"><i
+									class="bi bi-plus-circle-fill"></i></a></td>-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<footer th:replace="fragments/parts::footer(info='menu.departments')"></footer>
+		</div>
+	</div>
+</body>
+</html>
