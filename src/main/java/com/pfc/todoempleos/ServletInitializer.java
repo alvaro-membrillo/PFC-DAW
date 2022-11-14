@@ -1,4 +1,4 @@
-package org.iesalixar.servidor;
+package com.pfc.todoempleos;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

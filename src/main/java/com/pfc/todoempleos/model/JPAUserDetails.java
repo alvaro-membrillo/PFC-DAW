@@ -1,4 +1,4 @@
-package org.iesalixar.servidor.model;
+package com.pfc.todoempleos.model;
 
 import java.util.ArrayList;
 import java.util.Collection;

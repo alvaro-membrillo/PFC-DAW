@@ -1,6 +1,6 @@
-package org.iesalixar.servidor.repository;
+package com.pfc.todoempleos.repository;
 
-import org.iesalixar.servidor.model.Usuario;
+import com.pfc.todoempleos.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

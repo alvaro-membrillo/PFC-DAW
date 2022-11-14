@@ -1,8 +1,8 @@
-package org.iesalixar.servidor.services;
+package com.pfc.todoempleos.services;
 
-import org.iesalixar.servidor.model.JPAUserDetails;
-import org.iesalixar.servidor.model.Usuario;
-import org.iesalixar.servidor.repository.UsuarioRepository;
+import com.pfc.todoempleos.model.JPAUserDetails;
+import com.pfc.todoempleos.model.Usuario;
+import com.pfc.todoempleos.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package org.iesalixar.servidor;
+package com.pfc.todoempleos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package org.iesalixar.servidor.services;
+package com.pfc.todoempleos.services;
 
-import org.iesalixar.servidor.model.Usuario;
+import com.pfc.todoempleos.model.Usuario;
 
 public interface UsuarioService {
 

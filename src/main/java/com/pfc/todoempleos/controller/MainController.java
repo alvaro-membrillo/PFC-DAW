@@ -1,8 +1,8 @@
-package org.iesalixar.servidor.controller;
+package com.pfc.todoempleos.controller;
 
-import org.iesalixar.servidor.dto.UsuarioDTO;
-import org.iesalixar.servidor.model.Usuario;
-import org.iesalixar.servidor.services.UsuarioServiceImpl;
+import com.pfc.todoempleos.dto.UsuarioDTO;
+import com.pfc.todoempleos.model.Usuario;
+import com.pfc.todoempleos.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

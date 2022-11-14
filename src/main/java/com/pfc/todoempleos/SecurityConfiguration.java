@@ -1,6 +1,6 @@
-package org.iesalixar.servidor;
+package com.pfc.todoempleos;
 
-import org.iesalixar.servidor.services.JPAUserDetailsService;
+import com.pfc.todoempleos.services.JPAUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

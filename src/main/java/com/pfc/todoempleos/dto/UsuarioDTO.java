@@ -1,4 +1,4 @@
-package org.iesalixar.servidor.dto;
+package com.pfc.todoempleos.dto;
 
 public class UsuarioDTO {
 	
