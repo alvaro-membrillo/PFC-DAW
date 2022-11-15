@@ -7,13 +7,13 @@
 			<header th:insert="fragments/parts::menu"></header>
 			<div class="col-10 mt-5 mb-5">
 				<div sec:authorize="!isAuthenticated()">
-					<img src="/img/background.png" class="img-fluid mx-auto d-block">
+					<!--<img src="/img/background.png" class="img-fluid mx-auto d-block">-->
 				</div>
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<img src="/img/inicio_admin.png" class="img-fluid mx-auto d-block" alt="Imagen de admin" />
+					<!--<img src="/img/inicio_admin.png" class="img-fluid mx-auto d-block" alt="Imagen de admin" />-->
 				</div>
 				<div sec:authorize="hasRole('ROLE_USER')">
-					<img src="/img/inicio_usuario.png" class="img-fluid mx-auto d-block" alt="Imagen de usuario" />
+					<!--<img src="/img/inicio_usuario.png" class="img-fluid mx-auto d-block" alt="Imagen de usuario" />-->
 				</div>
 			</div>
 			<footer th:replace="fragments/parts::footer(info='menu.home')"></footer>

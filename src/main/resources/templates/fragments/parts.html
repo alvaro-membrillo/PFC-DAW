@@ -13,7 +13,7 @@
 				
 				<li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/login}" th:text="#{menu.login}"></a></li>
 				
-				<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores}" th:text="#{menu.teachers}"></a></li>
+				<!--<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores}" th:text="#{menu.teachers}"></a></li>-->
 				
 				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores/addProfesor}">Añadir profesor</a></li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores/addAsignatura}">Asignar asignaturas</a></li>
