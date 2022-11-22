@@ -1,22 +1,18 @@
 package com.pfc.todoempleos.controller;
 
-import com.pfc.todoempleos.dto.UsuarioDTO;
-import com.pfc.todoempleos.model.Usuario;
-import com.pfc.todoempleos.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.pfc.todoempleos.services.UsuarioService;
 
 @Controller
 public class MainController {
 	
 	@Autowired
-	UsuarioServiceImpl usuarioService;
+	private UsuarioService userService;
 	
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -24,29 +20,39 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/about")
-	public String about(Model model) {
-		model.addAttribute("contenido","ABOUT");
-		return "about";
+	@GetMapping("usuarios")
+	public String getUsuarios(Model model) {
+		model.addAttribute("usuarios", userService.getUsuarios());
+		return "usuarios";
 	}
 	
+//	@RequestMapping(value="api/usuarios")
+//	public List<Usuario> getUsuarios() {
+//		return usuarioDao.getUsuarios();
+//	}
+//	
+//	@RequestMapping("/about")
+//	public String about(Model model) {
+//		model.addAttribute("contenido","ABOUT");
+//		return "about";
+//	}
+//	
+//	
+//	@RequestMapping("/services")
+//	public String services(Model model)  {
+//		model.addAttribute("contenido","SERVICIOS");
+//		return "services";
+//	}
+//	
+//	@GetMapping("/register")
+//	public String registerGet(Model model) {
+//		
+//		UsuarioDTO userDTO = new UsuarioDTO();		
+//		model.addAttribute("usuario", userDTO);		
+//		return "register";
+//	}
 	
-	@RequestMapping("/services")
-	public String services(Model model)  {
-		model.addAttribute("contenido","SERVICIOS");
-		return "services";
-	}
-	
-	
-	@GetMapping("/register")
-	public String registerGet(Model model) {
-		
-		UsuarioDTO userDTO = new UsuarioDTO();		
-		model.addAttribute("usuario", userDTO);		
-		return "register";
-	}
-	
-	@PostMapping("/register")
+	/*@PostMapping("/register")
 	public String registerPost(@ModelAttribute UsuarioDTO usuario) {
 		
 		Usuario userBD = new Usuario();
@@ -66,7 +72,7 @@ public class MainController {
 		
 		return "redirect:/";
 		
-	}	
+	}*/	
 	
 
 }
