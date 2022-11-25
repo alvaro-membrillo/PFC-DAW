@@ -8,4 +8,5 @@ public interface UsuarioService {
 	
 	public List<Usuario> getUsuarios();
 	public Usuario insertUsuario(Usuario usuario);
+	
 }

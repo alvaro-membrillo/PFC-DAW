@@ -1,39 +1,34 @@
 package com.pfc.todoempleos.dto;
 
 public class UsuarioDTO {
-	
-	private String usuario;
-	private String nombre;
-	private String apellidos;
-	private String email;
+
+	private String userName;
 	private String password;
-	
+	private String email;
+	private String firstName;
+	private String lastName;
+	private String role;
+	private String activo;
+	private String birthDate;
+
 	public UsuarioDTO() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -44,14 +39,44 @@ public class UsuarioDTO {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	
-	
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getActivo() {
+		return activo;
+	}
+
+	public void setActivo(String activo) {
+		this.activo = activo;
+	}
+
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
 
 }
