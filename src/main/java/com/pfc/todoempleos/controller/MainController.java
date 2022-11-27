@@ -15,22 +15,22 @@ import com.pfc.todoempleos.services.UsuarioService;
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	private UsuarioService userService;
-	
+
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("contenido","INICIO");
+		model.addAttribute("contenido", "INICIO");
 		return "index";
 	}
-	
+
 	@GetMapping("usuarios")
 	public String getUsuarios(Model model) {
 		model.addAttribute("usuarios", userService.getUsuarios());
 		return "usuarios";
 	}
-	
+
 //	@RequestMapping(value="api/usuarios")
 //	public List<Usuario> getUsuarios() {
 //		return usuarioDao.getUsuarios();
@@ -51,32 +51,33 @@ public class MainController {
 //	
 	@GetMapping("/register")
 	public String registerGet(Model model) {
-		
-		UsuarioDTO userDTO = new UsuarioDTO();		
-		model.addAttribute("usuario", userDTO);		
+
+		UsuarioDTO userDTO = new UsuarioDTO();
+		model.addAttribute("usuario", userDTO);
 		return "register";
 	}
-	
+
 	@PostMapping("/register")
 	public String registerPost(@ModelAttribute UsuarioDTO usuario) {
-		
+
 		Usuario userBD = new Usuario();
 		userBD.setUserName(usuario.getUserName());
-		userBD.setApellidos(usuario.getApellidos());
-		userBD.setUserName(usuario.getUsuario());
-		userBD.setRole("ROLE_USER");
-		userBD.setEmail(usuario.getEmail());		
 		userBD.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getPassword()));
-		
+		userBD.setEmail(usuario.getEmail());
+		userBD.setFirstName(usuario.getFirstName());
+		userBD.setLastName(usuario.getLastName());
+		userBD.setRole("ROLE_USER");
+		userBD.setActivo(true);
+		userBD.setBirthDate(usuario.getBirthDate());
+
 		userBD = userService.insertUsuario(userBD);
-		
-		if (userBD==null) {
+
+		if (userBD == null) {
 			return "redirect:/register";
 		}
-		
+
 		return "redirect:/";
-		
-	}	
-	
+
+	}
 
 }

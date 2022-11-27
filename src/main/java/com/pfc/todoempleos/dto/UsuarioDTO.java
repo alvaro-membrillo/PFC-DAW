@@ -1,5 +1,13 @@
 package com.pfc.todoempleos.dto;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class UsuarioDTO {
 
 	private String userName;
@@ -9,7 +17,9 @@ public class UsuarioDTO {
 	private String lastName;
 	private String role;
 	private String activo;
-	private String birthDate;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=ISO.DATE)
+	private Date birthDate;
 
 	public UsuarioDTO() {
 		super();
@@ -71,11 +81,11 @@ public class UsuarioDTO {
 		this.activo = activo;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 

@@ -1,7 +1,7 @@
 package com.pfc.todoempleos.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "usuario")
@@ -41,22 +46,14 @@ public class Usuario implements Serializable {
 
 	@Column(name = "activo", nullable = false, columnDefinition = "BOOLEAN")
 	private boolean activo;
-
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "birthdate", nullable = false)
 	private Date birthDate;
 
-	public Usuario(Long id, String userName, String password, String email, String firstName, String lastName,
-			String role, boolean activo, Date birthDate) {
+	public Usuario() {
 		super();
-		this.id = id;
-		this.userName = userName;
-		this.password = password;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.role = role;
-		this.activo = activo;
-		this.birthDate = birthDate;
 	}
 
 	public Long getId() {

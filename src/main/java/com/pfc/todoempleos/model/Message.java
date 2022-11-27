@@ -7,7 +7,7 @@ import org.hibernate.annotations.Entity;
 import org.hibernate.annotations.Table;
 
 @Entity
-@Table(name = "message")
+@Table(name = "message", appliesTo = "")
 public class Message implements Serializable {
 
 	private int id_message;
