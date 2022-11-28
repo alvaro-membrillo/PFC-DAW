@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pfc.todoempleos.dto.AdDTO;
 import com.pfc.todoempleos.dto.UsuarioDTO;
+import com.pfc.todoempleos.model.Ad;
 import com.pfc.todoempleos.model.Usuario;
 import com.pfc.todoempleos.services.UsuarioService;
 
@@ -18,6 +20,9 @@ public class MainController {
 
 	@Autowired
 	private UsuarioService userService;
+	
+	@Autowired
+	private AdService adService;
 
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -31,24 +36,6 @@ public class MainController {
 		return "usuarios";
 	}
 
-//	@RequestMapping(value="api/usuarios")
-//	public List<Usuario> getUsuarios() {
-//		return usuarioDao.getUsuarios();
-//	}
-//	
-//	@RequestMapping("/about")
-//	public String about(Model model) {
-//		model.addAttribute("contenido","ABOUT");
-//		return "about";
-//	}
-//	
-//	
-//	@RequestMapping("/services")
-//	public String services(Model model)  {
-//		model.addAttribute("contenido","SERVICIOS");
-//		return "services";
-//	}
-//	
 	@GetMapping("/register")
 	public String registerGet(Model model) {
 
@@ -77,7 +64,32 @@ public class MainController {
 		}
 
 		return "redirect:/";
+	}
+	
+	@GetMapping("/addAd")
+	public String addAdGet(Model model) {
 
+		AdDTO adDTO = new AdDTO();
+		model.addAttribute("ad", adDTO);
+		return "addAd";
+	}
+
+	@PostMapping("/addAd")
+	public String addAdPost(@ModelAttribute AdDTO ad) {
+
+		Ad adAdBD = new Ad();
+		adAdBD.setUserName(ad.getUserName());
+		adAdBD.setEmail(ad.getEmail());
+		adAdBD.setFirstName(ad.getFirstName());
+		adAdBD.setLastName(ad.getLastName());
+
+		adAdBD = userService.insertUsuario(adAdBD);
+
+		if (adAdBD == null) {
+			return "redirect:/register";
+		}
+
+		return "redirect:/";
 	}
 
 }

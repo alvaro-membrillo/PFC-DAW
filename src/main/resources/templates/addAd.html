@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head th:replace="fragments/bootstrap::head(title='Main')">
+<!--<link rel="stylesheet" href="../../static/css/parts.css" />-->
+<!--<head th:replace="fragments/bootstrap::head(title='Registrase')"></head>-->
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<form action="#" th:action="@{/addAd}" th:object="${ad}" method="post">
+					<label for="usuario" class="form-label mt-3">Title</label>
+    				<input type="text" class="form-control" id="title" name="userName" th:field="*{title}" required >	
+    				<label for="nombre" class="form-label mt-3">Descripción</label>
+    				<div class="form-outline">
+					  <textarea class="form-control" id="descripcion" rows="4"></textarea>
+					</div>
+    				<label for="price" class="form-label mt-3">Precio</label>
+    				<input type="number" class="form-control" id="price" name="price" th:field="*{price}" required >
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Añadir" />
+				</form>
+			</div>		
+		</div>
+	</div>
+</body>
+</html>

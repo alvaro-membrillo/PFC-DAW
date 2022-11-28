@@ -15,7 +15,7 @@ public class Ad implements Serializable {
 	private String title;
 	private String description;
 	private double price;
-	private int idUsuario;
+	private int idVendedor;
 
 	public Ad() {
 		super();
@@ -62,11 +62,11 @@ public class Ad implements Serializable {
 	}
 
 	public int getIdUsuario() {
-		return idUsuario;
+		return idVendedor;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdUsuario(int idVendedor) {
+		this.idVendedor = idVendedor;
 	}
 
 }

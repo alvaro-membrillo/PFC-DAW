@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head th:replace="fragments/bootstrap::head(title='Main')">
-	<link rel="shortcut icon" href="../../resources/static/img/logo_todoempleos_negro.png" type="image/x-icon">
-</head>
-<body>
-	<div class="container mt-5">
-		<div class="row mt-5 justify-content-center">
-			<header th:insert="fragments/parts::menu"></header>
-			<div class="col-10 mt-5 mb-5">
-				<div sec:authorize="!isAuthenticated()">
-					<!--<img src="/img/background.png" class="img-fluid mx-auto d-block">-->
+	<head th:replace="fragments/bootstrap::head(title='Main')">
+		<link
+			rel="shortcut icon"
+			href="../../resources/static/img/logo_todoempleos_negro.png"
+			type="image/x-icon"
+		/>
+	</head>
+	<body>
+		<div class="container mt-5">
+			<div class="row mt-5 justify-content-center">
+				<header th:insert="fragments/parts::menu"></header>
+				<div class="col-10 mt-5 mb-5">
+					<div sec:authorize="!isAuthenticated()">
+						<!--<img src="/img/background.png" class="img-fluid mx-auto d-block">-->
+					</div>
+					<div sec:authorize="hasRole('ROLE_ADMIN')">
+						<!--<img src="/img/inicio_admin.png" class="img-fluid mx-auto d-block" alt="Imagen de admin" />-->
+					</div>
+					<div sec:authorize="hasRole('ROLE_USER')">
+						<!--<img src="/img/inicio_usuario.png" class="img-fluid mx-auto d-block" alt="Imagen de usuario" />-->
+					</div>
 				</div>
-				<div sec:authorize="hasRole('ROLE_ADMIN')">
-					<!--<img src="/img/inicio_admin.png" class="img-fluid mx-auto d-block" alt="Imagen de admin" />-->
-				</div>
-				<div sec:authorize="hasRole('ROLE_USER')">
-					<!--<img src="/img/inicio_usuario.png" class="img-fluid mx-auto d-block" alt="Imagen de usuario" />-->
-				</div>
+				<span th:replace="fragments/parts::addAd"></span>
+				<footer th:replace="fragments/parts::footer(info='menu.home')"></footer>
 			</div>
-			<footer th:replace="fragments/parts::footer(info='menu.home')"></footer>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

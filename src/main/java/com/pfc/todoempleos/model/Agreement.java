@@ -9,7 +9,7 @@ import org.hibernate.annotations.Table;
 @Table(name = "agreement")
 public class Agreement implements Serializable {
 
-	private int idUsuario;
+	private int idComprador;
 	private int idAd;
 	private boolean status;
 
@@ -18,11 +18,11 @@ public class Agreement implements Serializable {
 	}
 
 	public int getIdUsuario() {
-		return idUsuario;
+		return idComprador;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setIdUsuario(int idComprador) {
+		this.idComprador = idComprador;
 	}
 
 	public int getIdAd() {
