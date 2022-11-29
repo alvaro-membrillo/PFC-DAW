@@ -13,6 +13,7 @@ import com.pfc.todoempleos.dto.AdDTO;
 import com.pfc.todoempleos.dto.UsuarioDTO;
 import com.pfc.todoempleos.model.Ad;
 import com.pfc.todoempleos.model.Usuario;
+import com.pfc.todoempleos.services.AdService;
 import com.pfc.todoempleos.services.UsuarioService;
 
 @Controller
@@ -78,15 +79,15 @@ public class MainController {
 	public String addAdPost(@ModelAttribute AdDTO ad) {
 
 		Ad adAdBD = new Ad();
-		adAdBD.setUserName(ad.getUserName());
-		adAdBD.setEmail(ad.getEmail());
-		adAdBD.setFirstName(ad.getFirstName());
-		adAdBD.setLastName(ad.getLastName());
+		adAdBD.setTitle(ad.getTitle());
+		adAdBD.setDescription(ad.getDescription());
+		adAdBD.setPrice(ad.getPrice());
+		adAdBD.setIdVendedor(ad.getIdVendedor());
 
-		adAdBD = userService.insertUsuario(adAdBD);
+		adAdBD = adService.insertAd(adAdBD);
 
 		if (adAdBD == null) {
-			return "redirect:/register";
+			return "redirect:/addAd";
 		}
 
 		return "redirect:/";

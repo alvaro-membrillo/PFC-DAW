@@ -3,18 +3,37 @@ package com.pfc.todoempleos.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.Entity;
 import org.hibernate.annotations.Table;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name = "ad")
+@Table(name="ad")
 public class Ad implements Serializable {
-
+	
+	@Id
+	@Column(name = "id_ad", unique = true, nullable = false)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAd;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso=ISO.DATE)
+	@Column(name = "date", nullable = false)
 	private Date date;
+	@Column(name = "title", unique = true, nullable = false)
 	private String title;
+	@Column(name = "description", unique = true, nullable = false)
 	private String description;
+	@Column(name = "price", unique = false, nullable = false)
 	private double price;
+	@Column(name = "idVendedor", unique = false, nullable = false)
 	private int idVendedor;
 
 	public Ad() {
@@ -61,11 +80,11 @@ public class Ad implements Serializable {
 		this.price = price;
 	}
 
-	public int getIdUsuario() {
+	public int getIdVendedor() {
 		return idVendedor;
 	}
 
-	public void setIdUsuario(int idVendedor) {
+	public void setIdVendedor(int idVendedor) {
 		this.idVendedor = idVendedor;
 	}
 

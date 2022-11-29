@@ -11,13 +11,13 @@ import com.pfc.todoempleos.model.Usuario;
 public class AdServiceImpl implements AdService {
 
 	@Override
-	public List<Usuario> getAds() {
+	public List<Ad> getAds() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Ad insertUsuario(Ad ad) {
+	public Ad insertAd(Ad ad) {
 		// TODO Auto-generated method stub
 		return null;
 	}
