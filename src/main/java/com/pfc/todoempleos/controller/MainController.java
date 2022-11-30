@@ -1,6 +1,13 @@
 package com.pfc.todoempleos.controller;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +28,7 @@ public class MainController {
 
 	@Autowired
 	private UsuarioService userService;
-	
+
 	@Autowired
 	private AdService adService;
 
@@ -66,7 +73,7 @@ public class MainController {
 
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/addAd")
 	public String addAdGet(Model model) {
 
@@ -77,16 +84,31 @@ public class MainController {
 
 	@PostMapping("/addAd")
 	public String addAdPost(@ModelAttribute AdDTO ad) {
+		
+		Authentication auth = SecurityContextHolder
+	            .getContext()
+	            .getAuthentication();
+	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
+	    
+	    //System.out.println(userDetail.getUsername());
+	    
+	    //Usuario usuario = this.userService.ge(userDetail.getUsername());
+	    /*System.out.println(usuario);
+	    System.out.println(usuario.getNombre());*/
+		
+		Ad addAdBD = new Ad();
+		addAdBD.setTitle(ad.getTitle());
+		addAdBD.setDescription(ad.getDescription());
+		addAdBD.setPrice(ad.getPrice());
+		addAdBD.setDate(new Date());
+		//Pasar de optional a usuario
+		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+		Usuario user = usuario.get();
+		addAdBD.setUsuario(user);
 
-		Ad adAdBD = new Ad();
-		adAdBD.setTitle(ad.getTitle());
-		adAdBD.setDescription(ad.getDescription());
-		adAdBD.setPrice(ad.getPrice());
-		adAdBD.setIdVendedor(ad.getIdVendedor());
+		Ad adInsertado = adService.insertAd(addAdBD);
 
-		adAdBD = adService.insertAd(adAdBD);
-
-		if (adAdBD == null) {
+		if (adInsertado == null) {
 			return "redirect:/addAd";
 		}
 

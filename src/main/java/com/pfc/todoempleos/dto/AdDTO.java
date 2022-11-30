@@ -5,7 +5,7 @@ public class AdDTO {
 	private String title;
 	private String description;
 	private double price;
-	private int idVendedor;
+	private Long idVendedor;
 
 	public AdDTO() {
 		super();
@@ -35,11 +35,11 @@ public class AdDTO {
 		this.price = price;
 	}
 
-	public int getIdVendedor() {
+	public Long getIdVendedor() {
 		return idVendedor;
 	}
 
-	public void setIdVendedor(int idVendedor) {
+	public void setIdVendedor(Long idVendedor) {
 		this.idVendedor = idVendedor;
 	}
 

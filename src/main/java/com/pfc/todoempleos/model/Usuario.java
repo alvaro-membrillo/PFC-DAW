@@ -2,12 +2,16 @@ package com.pfc.todoempleos.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -46,11 +50,14 @@ public class Usuario implements Serializable {
 
 	@Column(name = "activo", nullable = false, columnDefinition = "BOOLEAN")
 	private boolean activo;
-	
+
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso=ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "birthdate", nullable = false)
 	private Date birthDate;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+	private List<Ad> anuncios;
 
 	public Usuario() {
 		super();
@@ -126,6 +133,14 @@ public class Usuario implements Serializable {
 
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public List<Ad> getAnuncios() {
+		return anuncios;
+	}
+
+	public void setAnuncios(List<Ad> anuncios) {
+		this.anuncios = anuncios;
 	}
 
 	public static long getSerialversionuid() {

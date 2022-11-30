@@ -11,13 +11,13 @@
 				<form action="#" th:action="@{/addAd}" th:object="${ad}" method="post">
 					<label for="usuario" class="form-label mt-3">Title</label>
     				<input type="text" class="form-control" id="title" name="userName" th:field="*{title}" required >	
-    				<label for="nombre" class="form-label mt-3">Descripción</label>
+    				<label for="nombre" class="form-label mt-3">Descripciï¿½n</label>
     				<div class="form-outline">
-					  <textarea class="form-control" id="descripcion" rows="4"></textarea>
+					  <textarea th:field="*{description}" class="form-control" id="descripcion" rows="4"></textarea>
 					</div>
     				<label for="price" class="form-label mt-3">Precio</label>
     				<input type="number" class="form-control" id="price" name="price" th:field="*{price}" required >
-    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Añadir" />
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Aï¿½adir" />
 				</form>
 			</div>		
 		</div>

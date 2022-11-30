@@ -4,27 +4,34 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name="ad")
+@Table(name = "ad")
 public class Ad implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(name = "id_ad", unique = true, nullable = false)
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq_ad")
+	//@SequenceGenerator(name = "seq_ad", allocationSize = 5)
 	private int idAd;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso=ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "date", nullable = false)
 	private Date date;
 	@Column(name = "title", unique = true, nullable = false)
@@ -33,8 +40,10 @@ public class Ad implements Serializable {
 	private String description;
 	@Column(name = "price", unique = false, nullable = false)
 	private double price;
-	@Column(name = "idVendedor", unique = false, nullable = false)
-	private int idVendedor;
+
+	@ManyToOne()
+	@JoinColumn(name = "id_vendedor")
+	private Usuario usuario;
 
 	public Ad() {
 		super();
@@ -80,12 +89,12 @@ public class Ad implements Serializable {
 		this.price = price;
 	}
 
-	public int getIdVendedor() {
-		return idVendedor;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdVendedor(int idVendedor) {
-		this.idVendedor = idVendedor;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
