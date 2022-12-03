@@ -14,29 +14,18 @@
 					<!--<img src="/img/background.png" class="img-fluid mx-auto d-block">-->
 				</div>
 				<div sec:authorize="isAuthenticated()">
-					<!--<div class="card" style="width: 18rem;">
-						<div class="card-header"></div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Vestibulum at eros</li>
-						</ul>
-					</div>-->
-					<p th:text="${ad.title}"></p>
-					<tr th:each="ad : ${listaAds}" th:text="${ad}">
-						<td th:text="${ad.title}" />
-						<td th:text="${ad.description}" />
-					</tr>
-					<span th:each="ad : ${listaAds}" th:text="${ad}">
-						<div class="card" style="width: 18rem;">
-							<div th:text="${ad.title}" class="card-header"></div>
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">Cras justo odio</li>
-								<li class="list-group-item">Dapibus ac facilisis in</li>
-								<li class="list-group-item">Vestibulum at eros</li>
-							</ul>
-						</div>
-					</span>
+					<div class="row">
+						<div class="col-*-*">h</div>
+						<div class="col-*-*">o</div>
+						<div class="col-*-*">l</div>
+					</div>
+
+					<div class="row">
+						<div class="col">a</div>
+						<div class="col">d</div>
+						<div class="col">i</div>
+						<div class="col">o</div>
+					</div>
 				</div>
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<!--<img src="/img/inicio_admin.png" class="img-fluid mx-auto d-block" alt="Imagen de admin" />-->

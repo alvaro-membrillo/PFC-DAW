@@ -1,21 +1,44 @@
 package com.pfc.todoempleos.model;
 
-import java.io.Serializable;
-import java.sql.Date;
+ import java.io.Serializable;
+import java.util.Date;
 
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
-@Table(name = "message", appliesTo = "")
+@Table(name = "message")
 public class Message implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name = "id_message", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_message;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "date", nullable = false)
 	private Date date;
+	@Column(name="content", unique=false, nullable=false)
 	private String content;
+	@Column(name="read", nullable=false, columnDefinition = "BOOLEAN")
 	private boolean read;
-	private int id_usuario;
-	private int id_ad;
+	
+	@Column(name="id_usuario", nullable=false)
+	private Usuario usuario;
+	
+	@Column(name="id_ad", nullable=false)
+	private Ad ad;
 
 	public Message() {
 		super();
@@ -53,20 +76,26 @@ public class Message implements Serializable {
 		this.read = read;
 	}
 
-	public int getId_usuario() {
-		return id_usuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public int getId_ad() {
-		return id_ad;
+	public Ad getAd() {
+		return ad;
 	}
 
-	public void setId_ad(int id_ad) {
-		this.id_ad = id_ad;
+	public void setAd(Ad ad) {
+		this.ad = ad;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 
 }

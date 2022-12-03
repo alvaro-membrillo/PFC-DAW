@@ -1,6 +1,5 @@
 package com.pfc.todoempleos.controller;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -20,21 +19,24 @@ import com.pfc.todoempleos.dto.AdDTO;
 import com.pfc.todoempleos.dto.UsuarioDTO;
 import com.pfc.todoempleos.model.Ad;
 import com.pfc.todoempleos.model.Usuario;
-import com.pfc.todoempleos.services.AdService;
-import com.pfc.todoempleos.services.UsuarioService;
+import com.pfc.todoempleos.services.AdServiceImpl;
+import com.pfc.todoempleos.services.UsuarioServiceImpl;
+
 
 @Controller
 public class MainController {
 
 	@Autowired
-	private UsuarioService userService;
+	UsuarioServiceImpl userService;
 
 	@Autowired
-	private AdService adService;
+	AdServiceImpl adService;
 
 	@RequestMapping("/")
 	public String home(Model model) {
 		model.addAttribute("contenido", "INICIO");
+		model.addAttribute("listaAds", adService.getAds());
+		model.addAttribute("ad", adService.getAds().get(0));
 		return "index";
 	}
 
@@ -89,12 +91,6 @@ public class MainController {
 	            .getContext()
 	            .getAuthentication();
 	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
-	    
-	    //System.out.println(userDetail.getUsername());
-	    
-	    //Usuario usuario = this.userService.ge(userDetail.getUsername());
-	    /*System.out.println(usuario);
-	    System.out.println(usuario.getNombre());*/
 		
 		Ad addAdBD = new Ad();
 		addAdBD.setTitle(ad.getTitle());
