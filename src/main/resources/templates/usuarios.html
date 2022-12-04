@@ -18,7 +18,7 @@
 							<th>Apellidos</th>
 							<th>Rol</th>
 							<th>Fecha de Nacimiento</th>
-							<th></th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,7 +30,9 @@
 							<td th:text="${u.getLastName()}"></td>
 							<td th:text="${u.getRole()}"></td>
 							<td th:text="${u.getBirthDate()}"></td>
-							<!--<td><a th:href="@{'/alumnos/asignaturas?codigo='+${a.getId()}}"><i class="bi bi-journal-bookmark-fill"></i></a></td>-->
+							<!--<td><a th:href="@{'/adminPanel?codigo='+${a.getId()}}"><i class="bi bi-journal-bookmark-fill"></i></a></td>-->
+							<td><a th:href="@{/admin/update(user=${u.getId()})}" class="btn btn-info">Editar</a></td>	
+							<!--<td><a th:href="@{/admin/delete/}+${u.id}" class="btn btn-danger">Eliminar</a></td>-->
 							</tr>
 					</tbody>
 				</table>

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pfc.todoempleos.dto.UsuarioDTO;
 import com.pfc.todoempleos.model.Usuario;
 import com.pfc.todoempleos.repository.UsuarioRepository;
 
@@ -33,26 +34,69 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Optional<Usuario> getUserById(Long id) {
-		
-		Optional<Usuario> usuario = userRepo.findById(id);
-		if (usuario.get().getId() != null) {
-			return usuario;
+	public Optional<Usuario> findUserById(Long id) {
+
+		if (id != null) {
+			return userRepo.findById(id);
 		}
-		
+
 		return null;
 	}
 
 	@Override
 	public Optional<Usuario> getUserByName(String name) {
-		
-		//Optional<Usuario> usuario = Optional.of(userRepo.findByUserName(name));
+
+		// Optional<Usuario> usuario = Optional.of(userRepo.findByUserName(name));
 		Optional<Usuario> usuario = Optional.ofNullable(userRepo.findByUserName(name));
 		if (usuario.get().getUserName() != null || usuario.isEmpty()) {
 			return usuario;
 		}
-		
+
 		return null;
+	}
+
+	/*
+	 * @Override public Usuario updateUsuario(UsuarioDTO usuario) {
+	 * 
+	 * if (usuario == null || usuario.getUserName() == null ||
+	 * usuario.getFirstName() == null || usuario.getLastName() == null ||
+	 * usuario.getPassword() == null) { return null; }
+	 * 
+	 * Usuario userBD = new Usuario(); userBD.setId(usuario.getId());
+	 * userBD.setUserName(usuario.getUserName());
+	 * userBD.setFirstName(usuario.getFirstName());
+	 * userBD.setLastName(usuario.getLastName());
+	 * userBD.setEmail(usuario.getEmail());
+	 * userBD.setPassword(usuario.getPassword());
+	 * 
+	 * return userRepo.save(usuario); }
+	 */
+
+	@Override
+	public Usuario updateUsuario(UsuarioDTO usuario) {
+
+		if (usuario == null || usuario.getId() == null || usuario.getUserName() == null
+				|| usuario.getFirstName() == null || usuario.getLastName() == null || usuario.getEmail() == null
+				|| usuario.getPassword() == null) {
+			return null;
+		}
+
+		Usuario userBD = new Usuario();
+		userBD.setId(usuario.getId());
+		userBD.setUserName(usuario.getUserName());
+		userBD.setFirstName(usuario.getFirstName());
+		userBD.setLastName(usuario.getLastName());
+		userBD.setEmail(usuario.getEmail());
+		userBD.setPassword(usuario.getPassword());
+
+		return userRepo.save(userBD);
+	}
+
+	@Override
+	public void deleteUsuario(Long id) {
+
+		userRepo.deleteById(id);
+
 	}
 
 }

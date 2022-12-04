@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pfc.todoempleos.dto.AdDTO;
 import com.pfc.todoempleos.dto.UsuarioDTO;
@@ -21,7 +22,6 @@ import com.pfc.todoempleos.model.Ad;
 import com.pfc.todoempleos.model.Usuario;
 import com.pfc.todoempleos.services.AdServiceImpl;
 import com.pfc.todoempleos.services.UsuarioServiceImpl;
-
 
 @Controller
 public class MainController {
@@ -35,16 +35,42 @@ public class MainController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		model.addAttribute("contenido", "INICIO");
-		model.addAttribute("listaAds", adService.getAds());
-		model.addAttribute("ad", adService.getAds().get(0));
+		model.addAttribute("ads", adService.getAds());
+		/* model.addAttribute("ad", adService.getAds().get(0)); */
 		return "index";
 	}
+	
+	/*ZONA DE ADMINISTRADOR*/
 
-	@GetMapping("usuarios")
+	@GetMapping("/admin")
 	public String getUsuarios(Model model) {
+		
 		model.addAttribute("usuarios", userService.getUsuarios());
 		return "usuarios";
 	}
+	
+	@GetMapping("/admin/update")
+	public String updateUsuario(@RequestParam(name="user") String user, Model model) {
+		
+		if (user == null) {
+			return "redirect:/admin/usuarios/";
+		}
+		
+		Optional<Usuario> usuario = userService.findUserById(Long.parseLong(user));
+		model.addAttribute("usuario", usuario.get());
+		
+		return "updateUsuario";
+	}
+	
+	@PostMapping("/admin/update/")
+	public String postUpdateUsuario(@ModelAttribute UsuarioDTO user, Model model) {
+		
+		userService.updateUsuario(user);
+		return "redirect:/admin";
+	}
+	
+	
+	/*ZONA DE USUARIO*/
 
 	@GetMapping("/register")
 	public String registerGet(Model model) {
@@ -86,18 +112,16 @@ public class MainController {
 
 	@PostMapping("/addAd")
 	public String addAdPost(@ModelAttribute AdDTO ad) {
-		
-		Authentication auth = SecurityContextHolder
-	            .getContext()
-	            .getAuthentication();
-	    UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+
 		Ad addAdBD = new Ad();
 		addAdBD.setTitle(ad.getTitle());
 		addAdBD.setDescription(ad.getDescription());
 		addAdBD.setPrice(ad.getPrice());
 		addAdBD.setDate(new Date());
-		//Pasar de optional a usuario
+		// Pasar de optional a usuario
 		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
 		Usuario user = usuario.get();
 		addAdBD.setUsuario(user);

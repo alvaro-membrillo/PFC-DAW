@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Editar estudiante')"></head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<form action="#" th:action="@{/admin/update}" th:object="${usuario}" method="post">
+					<label for="usuario" class="form-label mt-3">Nombre de usuario</label>
+    				<input type="text" class="form-control" id="userName" name="userName" th:field="*{userName}" required >	
+    				<label for="nombre" class="form-label mt-3">Nombre</label>
+    				<input type="text" class="form-control" id="firstName" name="firstName" th:field="*{firstName}" required >
+    				<label for="apellidos" class="form-label mt-3">Apellidos</label>
+    				<input type="text" class="form-control" id="lastName" name="lastName" th:field="*{lastName}" required >
+    				<label for="email" class="form-label mt-3">Email</label>
+    				<input type="email" class="form-control" id="email" name="email" th:field="*{email}" required >
+    				<label for="password" class="form-label mt-3">Password</label>
+    				<input type="password" class="form-control" id="password" name="password" th:field="*{password}" required>
+    				<label for="birthDate" class="form-label mt-3">BirthDate</label>
+    				<input type="date" class="form-control" id="bithDate" name="birthDate" th:field="*{birthDate}" required>
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />
+				</form>
+			</div>		
+		</div>
+	</div>
+</body>
+</html>

@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class UsuarioDTO {
 
+	private Long id;
 	private String userName;
 	private String password;
 	private String email;
@@ -18,11 +19,19 @@ public class UsuarioDTO {
 	private String role;
 	private String activo;
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso=ISO.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date birthDate;
 
 	public UsuarioDTO() {
 		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUserName() {
