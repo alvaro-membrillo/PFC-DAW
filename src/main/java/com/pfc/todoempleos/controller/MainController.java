@@ -43,7 +43,7 @@ public class MainController {
 	/*ZONA DE ADMINISTRADOR*/
 
 	@GetMapping("/admin")
-	public String getUsuarios(Model model) {
+	public String adminHome(Model model) {
 		
 		model.addAttribute("usuarios", userService.getUsuarios());
 		return "usuarios";
@@ -80,6 +80,13 @@ public class MainController {
 	
 	
 	/*ZONA DE USUARIO*/
+	
+	@GetMapping("/user")
+	public String userHome(Model model) {
+		
+		model.addAttribute("listaAds", adService.getAds());
+		return "anuncios";
+	}
 
 	@GetMapping("/register")
 	public String registerGet(Model model) {

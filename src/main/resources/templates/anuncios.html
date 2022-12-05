@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/bootstrap::head(title='Anuncios')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<div class="col-8">
+				<h1 class="text-center">Lista de anuncios</h1>
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Título</th>
+							<th>Fecha subida</th>
+							<th>Descripción</th>
+							<th>Precio</th>
+						</tr>
+					</thead>
+					<tbody>
+							<tr th:each="ad : ${listaAds}">
+							<td th:text="${ad.getId()}"></td>
+							<td th:text="${ad.getTitle()}"></td>
+							<td th:text="${ad.getEmail()}"></td>
+							<td th:text="${ad.getFirstName()}"></td>
+							<td th:text="${ad.getLastName()}"></td>
+							<td th:text="${ad.getRole()}"></td>
+							<td th:text="${ad.getBirthDate()}"></td>
+							<!--<td><a th:href="@{/admin/update(user=${u.getId()})}" class="btn btn-info">Editar</a></td>
+							<td><a th:href="@{/admin/delete(user=${u.getId()})}" class="btn btn-danger">Eliminar</a></td>-->
+							</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!--<footer th:replace="fragments/parts::footer(info='menu.students')"></footer>-->
+		</div>
+	</div>
+</body>
+</html>

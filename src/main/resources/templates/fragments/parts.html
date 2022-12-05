@@ -52,6 +52,9 @@
 						<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
 							class="nav-link text-white" th:href="@{/admin}">Panel de
 								Administrador</a></li>
+						<li sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a
+							class="nav-link text-white" th:href="@{/user}">Panel de
+								Usuario</a></li>
 					</span>
 				<!--</div>-->
 				

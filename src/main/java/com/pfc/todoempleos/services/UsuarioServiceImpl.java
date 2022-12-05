@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pfc.todoempleos.dto.UsuarioDTO;
@@ -75,7 +76,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario updateUsuario(UsuarioDTO usuario) {
 
-		if (usuario == null /*|| usuario.getId() == null*/ || usuario.getUserName() == null
+		if (usuario == null || usuario.getId() == null || usuario.getUserName() == null
 				|| usuario.getFirstName() == null || usuario.getLastName() == null || usuario.getEmail() == null
 				|| usuario.getPassword() == null) {
 			return null;
@@ -85,7 +86,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		userBD.setId(usuario.getId());
 		userBD.setUserName(usuario.getUserName());
 		userBD.setEmail(usuario.getEmail());
-		userBD.setPassword(usuario.getPassword());
+		userBD.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getPassword()));
 		userBD.setFirstName(usuario.getFirstName());
 		userBD.setLastName(usuario.getLastName());
 		userBD.setRole(usuario.getRole());

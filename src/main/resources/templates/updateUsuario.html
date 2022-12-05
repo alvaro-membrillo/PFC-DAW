@@ -7,7 +7,7 @@
 			<div class="col-6">
 				<form action="#" th:action="@{/admin/update}" th:object="${usuario}" method="post">
 					<label for="usuario" class="form-label mt-3">Id</label>
-    				<input type="text" class="form-control" id="id" name="id" th:field="*{id}" disabled>
+    				<input type="text" class="form-control" id="id" name="id" th:field="*{id}" readonly>
 					<label for="usuario" class="form-label mt-3">Nombre de usuario</label>
     				<input type="text" class="form-control" id="userName" name="userName" th:field="*{userName}" required >	
     				<label for="nombre" class="form-label mt-3">Nombre</label>
@@ -21,7 +21,13 @@
     				<label for="birthDate" class="form-label mt-3">BirthDate</label>
     				<input type="date" class="form-control" id="bithDate" name="birthDate" th:field="*{birthDate}" required>
     				<label for="role" class="form-label mt-3">Role</label>
-    				<input type="text" class="form-control" id="role" name="role" th:field="*{role}" required>
+    				
+    				<!--<div th:if="${usuario.role=='ROLE_USUARIO'}">-->
+    				<select name="role" class="form-select mt-3"  th:field="*{role}">
+	                    	<option th:value="'ROLE_USUARIO'" th:text="USUARIO">USUARIO</option>
+	                    	<option th:value="'ROLE_ADMIN'" th:text="ADMIN">ADMIN</option>
+                    </select>
+    				<!--<input type="text" class="form-control" id="role" name="role" th:field="*{role}" required>-->
     				<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />
 				</form>
 			</div>		
