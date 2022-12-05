@@ -17,7 +17,7 @@ public class UsuarioDTO {
 	private String firstName;
 	private String lastName;
 	private String role;
-	private String activo;
+	private boolean activo;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date birthDate;
@@ -82,11 +82,11 @@ public class UsuarioDTO {
 		this.role = role;
 	}
 
-	public String getActivo() {
+	public boolean getActivo() {
 		return activo;
 	}
 
-	public void setActivo(String activo) {
+	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
 

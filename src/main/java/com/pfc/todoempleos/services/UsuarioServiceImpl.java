@@ -75,7 +75,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario updateUsuario(UsuarioDTO usuario) {
 
-		if (usuario == null || usuario.getId() == null || usuario.getUserName() == null
+		if (usuario == null /*|| usuario.getId() == null*/ || usuario.getUserName() == null
 				|| usuario.getFirstName() == null || usuario.getLastName() == null || usuario.getEmail() == null
 				|| usuario.getPassword() == null) {
 			return null;
@@ -84,10 +84,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario userBD = new Usuario();
 		userBD.setId(usuario.getId());
 		userBD.setUserName(usuario.getUserName());
-		userBD.setFirstName(usuario.getFirstName());
-		userBD.setLastName(usuario.getLastName());
 		userBD.setEmail(usuario.getEmail());
 		userBD.setPassword(usuario.getPassword());
+		userBD.setFirstName(usuario.getFirstName());
+		userBD.setLastName(usuario.getLastName());
+		userBD.setRole(usuario.getRole());
+		userBD.setBirthDate(usuario.getBirthDate());
+		userBD.setActivo(usuario.getActivo());
 
 		return userRepo.save(userBD);
 	}

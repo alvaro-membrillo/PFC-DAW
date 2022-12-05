@@ -62,12 +62,21 @@ public class MainController {
 		return "updateUsuario";
 	}
 	
-	@PostMapping("/admin/update/")
+	@PostMapping("/admin/update")
 	public String postUpdateUsuario(@ModelAttribute UsuarioDTO user, Model model) {
 		
 		userService.updateUsuario(user);
+		
 		return "redirect:/admin";
 	}
+	
+	@RequestMapping("/admin/delete")
+    public String clientesDelete(@RequestParam(name = "user") String user, Model model) {
+
+        userService.deleteUsuario(Long.parseLong(user));
+
+        return "redirect:/admin";
+    }
 	
 	
 	/*ZONA DE USUARIO*/
