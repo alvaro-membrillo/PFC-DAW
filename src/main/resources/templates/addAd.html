@@ -17,7 +17,12 @@
 					</div>
     				<label for="price" class="form-label mt-3">Precio</label>
     				<input type="number" class="form-control" id="price" name="price" th:field="*{price}" required >
-    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Aï¿½adir" />
+    				<label for="tipo" class="form-label mt-3">Tipo</label>
+    				<select name="tipo" class="form-select mt-3" th:field="*{tipo}">
+    					<option th:value="'OFERTA'" th:text="OFERTA">OFERTA</option>
+    					<option th:value="'DEMANDA'" th:text="DEMANDA">DEMANDA</option>
+    				</select>
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Añadir" />
 				</form>
 			</div>		
 		</div>

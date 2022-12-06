@@ -13,23 +13,21 @@ public class AdServiceImpl implements AdService {
 
 	@Autowired
 	private AdRepository adRepo;
-	
+
 	@Override
 	public List<Ad> getAds() {
-		
+
 		return adRepo.findAll();
 	}
 
 	@Override
 	public Ad insertAd(Ad ad) {
-		
+
 		if (ad != null) {
 			return adRepo.save(ad);
 		}
-		
+
 		return null;
 	}
-	
-	
-	
+
 }

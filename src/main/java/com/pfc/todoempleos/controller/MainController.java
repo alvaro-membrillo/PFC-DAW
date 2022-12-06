@@ -1,6 +1,8 @@
 package com.pfc.todoempleos.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,53 +41,69 @@ public class MainController {
 		/* model.addAttribute("ad", adService.getAds().get(0)); */
 		return "index";
 	}
-	
-	/*ZONA DE ADMINISTRADOR*/
+
+	/* ZONA DE ADMINISTRADOR */
 
 	@GetMapping("/admin")
 	public String adminHome(Model model) {
-		
+
 		model.addAttribute("usuarios", userService.getUsuarios());
 		return "usuarios";
 	}
-	
+
 	@GetMapping("/admin/update")
-	public String updateUsuario(@RequestParam(name="user") String user, Model model) {
-		
+	public String updateUsuario(@RequestParam(name = "user") String user, Model model) {
+
 		if (user == null) {
 			return "redirect:/admin/usuarios/";
 		}
-		
+
 		Optional<Usuario> usuario = userService.findUserById(Long.parseLong(user));
 		model.addAttribute("usuario", usuario.get());
-		
+
 		return "updateUsuario";
 	}
-	
+
 	@PostMapping("/admin/update")
 	public String postUpdateUsuario(@ModelAttribute UsuarioDTO user, Model model) {
-		
+
 		userService.updateUsuario(user);
-		
+
 		return "redirect:/admin";
 	}
-	
+
 	@RequestMapping("/admin/delete")
-    public String clientesDelete(@RequestParam(name = "user") String user, Model model) {
+	public String clientesDelete(@RequestParam(name = "user") String user, Model model) {
 
-        userService.deleteUsuario(Long.parseLong(user));
+		userService.deleteUsuario(Long.parseLong(user));
 
-        return "redirect:/admin";
-    }
-	
-	
-	/*ZONA DE USUARIO*/
-	
+		return "redirect:/admin";
+	}
+
+	/* ZONA DE USUARIO */
+
 	@GetMapping("/user")
 	public String userHome(Model model) {
 		
-		model.addAttribute("listaAds", adService.getAds());
-		return "anuncios";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+		Usuario user = usuario.get();
+		
+		List<Ad> listaAnuncios = adService.getAds();
+		List<Ad> anunciosUsuario = new ArrayList<>();
+		
+		for (Ad ad : listaAnuncios) {
+			if (ad.getUsuario().getId() == user.getId()) {
+				anunciosUsuario.add(ad);
+			}
+		}
+
+		/*model.addAttribute("listaAds", adService.getAds());
+		model.addAttribute("user", user);*/
+		model.addAttribute("adList", anunciosUsuario);
+
+		return "userAds";
 	}
 
 	@GetMapping("/register")
@@ -137,6 +155,7 @@ public class MainController {
 		addAdBD.setDescription(ad.getDescription());
 		addAdBD.setPrice(ad.getPrice());
 		addAdBD.setDate(new Date());
+		addAdBD.setTipo(ad.getTipo());
 		// Pasar de optional a usuario
 		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
 		Usuario user = usuario.get();

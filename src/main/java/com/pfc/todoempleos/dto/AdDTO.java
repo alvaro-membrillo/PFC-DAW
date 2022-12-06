@@ -6,6 +6,7 @@ public class AdDTO {
 	private String description;
 	private double price;
 	private Long idVendedor;
+	private String tipo;
 
 	public AdDTO() {
 		super();
@@ -41,6 +42,14 @@ public class AdDTO {
 
 	public void setIdVendedor(Long idVendedor) {
 		this.idVendedor = idVendedor;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
