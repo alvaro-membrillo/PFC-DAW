@@ -30,4 +30,10 @@ public class AdServiceImpl implements AdService {
 		return null;
 	}
 
+	@Override
+	public Ad findByTitle(String title) {
+		
+		return adRepo.findAdByTitle(title);
+	}
+
 }

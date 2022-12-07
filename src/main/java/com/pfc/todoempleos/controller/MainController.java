@@ -34,10 +34,33 @@ public class MainController {
 	@Autowired
 	AdServiceImpl adService;
 
-	@RequestMapping("/")
-	public String home(Model model) {
-		model.addAttribute("contenido", "INICIO");
-		model.addAttribute("ads", adService.getAds());
+	@GetMapping("/")
+	public String home(@RequestParam String titulo, @ModelAttribute("ad") Ad anuncio, Model model) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+		Usuario user = usuario.get();
+
+		List<Ad> listaAnuncios = adService.getAds();
+		List<Ad> anunciosUsuario = new ArrayList<>();
+
+		for (Ad ad : listaAnuncios) {
+			if (ad.getUsuario().getId() == user.getId()) {
+				anunciosUsuario.add(ad);
+			}
+		}
+
+		/*
+		 * model.addAttribute("listaAds", adService.getAds());
+		 * model.addAttribute("user", user);
+		 */
+		model.addAttribute("adList", anunciosUsuario);
+		model.addAttribute("adByTitle", adService.findByTitle(titulo));
+		
+		/*model.addAttribute("contenido", "INICIO");
+		model.addAttribute("ads", adService.getAds());*/
+
 		/* model.addAttribute("ad", adService.getAds().get(0)); */
 		return "index";
 	}
@@ -48,6 +71,30 @@ public class MainController {
 	public String adminHome(Model model) {
 
 		model.addAttribute("usuarios", userService.getUsuarios());
+
+		// Vamos a ocultar al usuario que ha iniciado sesión sus propios anuncios dentro
+		// del buscador
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+		Usuario user = usuario.get();
+
+		List<Ad> listaAnuncios = adService.getAds();
+		List<Ad> otrosAnuncios = new ArrayList<>();
+
+		for (Ad ad : listaAnuncios) {
+			if (ad.getUsuario().getId() == user.getId()) {
+				otrosAnuncios.add(ad);
+			}
+		}
+
+		/*
+		 * model.addAttribute("listaAds", adService.getAds());
+		 * model.addAttribute("user", user);
+		 */
+		model.addAttribute("adList", otrosAnuncios);
+
 		return "usuarios";
 	}
 
@@ -82,29 +129,61 @@ public class MainController {
 
 	/* ZONA DE USUARIO */
 
-	@GetMapping("/user")
-	public String userHome(Model model) {
-		
+	/*@GetMapping("/user")
+	public String userHome(@RequestParam String titulo, @ModelAttribute("ad") Ad anuncio, Model model) {
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
 		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
 		Usuario user = usuario.get();
-		
+
 		List<Ad> listaAnuncios = adService.getAds();
 		List<Ad> anunciosUsuario = new ArrayList<>();
-		
+
 		for (Ad ad : listaAnuncios) {
 			if (ad.getUsuario().getId() == user.getId()) {
 				anunciosUsuario.add(ad);
 			}
+		}*/
+
+		/*
+		 * model.addAttribute("listaAds", adService.getAds());
+		 * model.addAttribute("user", user);
+		 */
+		/*model.addAttribute("adList", anunciosUsuario);
+		model.addAttribute("adByTitle", adService.findByTitle(titulo));*/
+		
+		/*AdDTO adDTO = new AdDTO();
+		model.addAttribute("ad", adDTO);*/
+
+		/*return "userAds";
+	}*/
+	
+	/*@PostMapping("/user")
+	public String userHomePost(@ModelAttribute AdDTO ad) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+
+		Ad addAdBD = new Ad();
+		addAdBD.setTitle(ad.getTitle());
+		addAdBD.setDescription(ad.getDescription());
+		addAdBD.setPrice(ad.getPrice());
+		addAdBD.setDate(new Date());
+		addAdBD.setTipo(ad.getTipo());
+		// Pasar de optional a usuario
+		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+		Usuario user = usuario.get();
+		addAdBD.setUsuario(user);
+
+		Ad adInsertado = adService.insertAd(addAdBD);
+
+		if (adInsertado == null) {
+			return "redirect:/addAd";
 		}
 
-		/*model.addAttribute("listaAds", adService.getAds());
-		model.addAttribute("user", user);*/
-		model.addAttribute("adList", anunciosUsuario);
-
-		return "userAds";
-	}
+		return "redirect:/";
+	}*/
 
 	@GetMapping("/register")
 	public String registerGet(Model model) {

@@ -8,5 +8,6 @@ public interface AdService {
 	
 	public List<Ad> getAds();
 	public Ad insertAd(Ad ad);
+	public Ad findByTitle(String title);
 	
 }
