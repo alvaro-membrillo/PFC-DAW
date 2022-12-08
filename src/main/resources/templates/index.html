@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head th:replace="fragments/bootstrap::head(title='Main')">
-<link rel="shortcut icon"
-	href="../../resources/static/img/logo_todoempleos_negro.png"
-	type="image/x-icon" />
+	<link rel="shortcut icon" href="../../resources/static/img/logo_todoempleos_negro.png" type="image/x-icon" />
 </head>
+
 <body>
 	<div class="container mt-5">
 		<div class="row mt-5 justify-content-center">
@@ -18,22 +18,23 @@
 					<!--<input type="text" class="form-control" id="search" name="search" th:field="*{search}">
 					<input type="submit" class="btn btn-warning w-100 mt-3" value="BUSCAR" />-->
 
-					<form action="#" th:action="@{/user}" th:object="${adByTitle}"
+					<form action="#" th:action="@{/}" th:object="${ad}"
 						method="get">
-						<label for="usuario" class="form-label mt-3">Title</label> <input
-							type="text" class="form-control" id="title" name="userName"
-							th:field="*{title}">-->
-						<!--<label for="tipo" class="form-label mt-3">Tipo</label>
+						<label for="title" class="form-label mt-3">Title</label>
+						<input type="text" class="form-control" id="title" name="title" th:field="*{title}">
+					<!--<label for="tipo" class="form-label mt-3">Tipo</label>
 						<select name="tipo" class="form-select mt-3" th:field="*{tipo}">
 							<option th:value="'TODOS'" th:text="TODOS">TODOS</option>
 							<option th:value="'OFERTA'" th:text="OFERTA">OFERTA</option>
 							<option th:value="'DEMANDA'" th:text="DEMANDA">DEMANDA</option>
 						</select>-->
-						<input type="submit" class="btn btn-success w-100 mt-3"
-							value="BUSCAR" />
+					<input type="submit" class="btn btn-success w-100 mt-3 mb-5" value="BUSCAR" />
 					</form>
-					
-					<div th:each="ad : ${adByTitle}">
+
+					<div th:if="${anuncios.size}" th:each="ad : ${busqueda}">
+						<!--<div class="col-12">
+							<h2>Resultados "<span th:text="${busqueda}"></span>": </h2>
+						</div>-->
 						<div class="card" style="width: 18rem;">
 							<div th:text="${ad.title}" class="card-header"></div>
 							<ul class="list-group list-group-flush">
@@ -44,6 +45,21 @@
 							</ul>
 						</div>
 					</div>
+					<div th:unless="${anuncios.size}" th:each="ad : ${anuncios}">
+						<!--<div class="col-12">
+							<h2>No hay resultados de "<span th:text="${busqueda}"></span>"</h2>
+						</div>-->
+						<div class="card" style="width: 18rem;">
+							<div th:text="${ad.title}" class="card-header"></div>
+							<ul class="list-group list-group-flush">
+								<li th:text="${ad.description}" class="list-group-item"></li>
+								<li th:text="${ad.tipo}" class="list-group-item"></li>
+								<li class="list-group-item"></li>
+								<li class="btn btn-primary">Contactar</li>
+							</ul>
+						</div>
+					</div>
+
 
 					<!--<div class="card" style="width: 18rem;">
 						<div class="card-header"></div>
@@ -84,4 +100,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

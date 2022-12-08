@@ -35,35 +35,39 @@ public class MainController {
 	AdServiceImpl adService;
 
 	@GetMapping("/")
-	public String home(@RequestParam String titulo, @ModelAttribute("ad") Ad anuncio, Model model) {
+	public String home(@RequestParam(name="title", required=false) String titulo, @ModelAttribute("ad") Ad anuncio, Model model) {
+
+		try {
+			
+			List<Ad> listaAnuncios = adService.getAds();
+			List<Ad> busqueda = adService.findByTitle(titulo);
+			
+			model.addAttribute("anuncios", listaAnuncios);
+			model.addAttribute("busqueda", busqueda);
+			model.addAttribute("title", anuncio.getTitle());
+			
+			return "index";
+			
+		} catch (Exception e) {
+			model.addAttribute("error", e.getMessage());
+		}
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return "index";
+
+	}
+	
+	/*@PostMapping("/")
+	public String searchPost(@ModelAttribute AdDTO anuncio, Model model) {
+		
+		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
 		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
-		Usuario user = usuario.get();
-
-		List<Ad> listaAnuncios = adService.getAds();
-		List<Ad> anunciosUsuario = new ArrayList<>();
-
-		for (Ad ad : listaAnuncios) {
-			if (ad.getUsuario().getId() == user.getId()) {
-				anunciosUsuario.add(ad);
-			}
-		}
-
-		/*
-		 * model.addAttribute("listaAds", adService.getAds());
-		 * model.addAttribute("user", user);
-		 */
-		model.addAttribute("adList", anunciosUsuario);
-		model.addAttribute("adByTitle", adService.findByTitle(titulo));
+		Usuario user = usuario.get();*/
 		
-		/*model.addAttribute("contenido", "INICIO");
-		model.addAttribute("ads", adService.getAds());*/
+		/*model.addAttribute("busqueda", adService.findByTitle(anuncio.getTitle()));
 
-		/* model.addAttribute("ad", adService.getAds().get(0)); */
 		return "index";
-	}
+	}*/
 
 	/* ZONA DE ADMINISTRADOR */
 
@@ -129,61 +133,13 @@ public class MainController {
 
 	/* ZONA DE USUARIO */
 
-	/*@GetMapping("/user")
-	public String userHome(@RequestParam String titulo, @ModelAttribute("ad") Ad anuncio, Model model) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
-		Usuario user = usuario.get();
-
-		List<Ad> listaAnuncios = adService.getAds();
-		List<Ad> anunciosUsuario = new ArrayList<>();
-
-		for (Ad ad : listaAnuncios) {
-			if (ad.getUsuario().getId() == user.getId()) {
-				anunciosUsuario.add(ad);
-			}
-		}*/
-
-		/*
-		 * model.addAttribute("listaAds", adService.getAds());
-		 * model.addAttribute("user", user);
-		 */
-		/*model.addAttribute("adList", anunciosUsuario);
-		model.addAttribute("adByTitle", adService.findByTitle(titulo));*/
+	@GetMapping()
+	public String contactar(@RequestParam(value="id", required = true) String id, @ModelAttribute AdDTO adDTO, Model model) {
 		
-		/*AdDTO adDTO = new AdDTO();
-		model.addAttribute("ad", adDTO);*/
-
-		/*return "userAds";
-	}*/
-	
-	/*@PostMapping("/user")
-	public String userHomePost(@ModelAttribute AdDTO ad) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-
-		Ad addAdBD = new Ad();
-		addAdBD.setTitle(ad.getTitle());
-		addAdBD.setDescription(ad.getDescription());
-		addAdBD.setPrice(ad.getPrice());
-		addAdBD.setDate(new Date());
-		addAdBD.setTipo(ad.getTipo());
-		// Pasar de optional a usuario
-		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
-		Usuario user = usuario.get();
-		addAdBD.setUsuario(user);
-
-		Ad adInsertado = adService.insertAd(addAdBD);
-
-		if (adInsertado == null) {
-			return "redirect:/addAd";
-		}
-
-		return "redirect:/";
-	}*/
+		
+		
+		return "";
+	}
 
 	@GetMapping("/register")
 	public String registerGet(Model model) {

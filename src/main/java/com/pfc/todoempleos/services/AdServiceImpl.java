@@ -2,6 +2,8 @@ package com.pfc.todoempleos.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +33,22 @@ public class AdServiceImpl implements AdService {
 	}
 
 	@Override
-	public Ad findByTitle(String title) {
+	public List<Ad> findByTitle(String title) {
 		
 		return adRepo.findAdByTitle(title);
 	}
+	
+
+//	@Override
+//	@Transactional
+//	public List<Ad> findByTitle(String q) throws Exception {
+//		
+//		try {
+//			List<Ad> anuncios = this.adRepo.findByTitle(q);
+//			return anuncios;
+//		} catch (Exception e) {
+//			throw new Exception(e.getMessage());
+//		}	
+//	}
 
 }
