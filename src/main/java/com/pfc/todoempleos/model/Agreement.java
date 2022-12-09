@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "agreement")
+@IdClass(AgreementId.class)
 public class Agreement implements Serializable {
 
 	private static final long serialVersionUID = 1L;

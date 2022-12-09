@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pfc.todoempleos.dto.AdDTO;
+import com.pfc.todoempleos.dto.AgreementDTO;
 import com.pfc.todoempleos.dto.UsuarioDTO;
 import com.pfc.todoempleos.model.Ad;
+import com.pfc.todoempleos.model.Agreement;
 import com.pfc.todoempleos.model.Usuario;
 import com.pfc.todoempleos.services.AdServiceImpl;
+import com.pfc.todoempleos.services.AgreementServiceImpl;
 import com.pfc.todoempleos.services.UsuarioServiceImpl;
 
 @Controller
@@ -34,40 +37,31 @@ public class MainController {
 	@Autowired
 	AdServiceImpl adService;
 
+	@Autowired
+	AgreementServiceImpl agService;
+
 	@GetMapping("/")
-	public String home(@RequestParam(name="title", required=false) String titulo, @ModelAttribute("ad") Ad anuncio, Model model) {
+	public String home(@RequestParam(name = "title", required = false) String titulo, @ModelAttribute("ad") Ad anuncio,
+			Model model) {
 
 		try {
-			
+
 			List<Ad> listaAnuncios = adService.getAds();
 			List<Ad> busqueda = adService.findByTitle(titulo);
-			
+
 			model.addAttribute("anuncios", listaAnuncios);
 			model.addAttribute("busqueda", busqueda);
 			model.addAttribute("title", anuncio.getTitle());
-			
+
 			return "index";
-			
+
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		
+
 		return "index";
 
 	}
-	
-	/*@PostMapping("/")
-	public String searchPost(@ModelAttribute AdDTO anuncio, Model model) {
-		
-		/*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
-		Usuario user = usuario.get();*/
-		
-		/*model.addAttribute("busqueda", adService.findByTitle(anuncio.getTitle()));
-
-		return "index";
-	}*/
 
 	/* ZONA DE ADMINISTRADOR */
 
@@ -75,9 +69,6 @@ public class MainController {
 	public String adminHome(Model model) {
 
 		model.addAttribute("usuarios", userService.getUsuarios());
-
-		// Vamos a ocultar al usuario que ha iniciado sesión sus propios anuncios dentro
-		// del buscador
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		UserDetails userDetail = (UserDetails) auth.getPrincipal();
@@ -93,10 +84,6 @@ public class MainController {
 			}
 		}
 
-		/*
-		 * model.addAttribute("listaAds", adService.getAds());
-		 * model.addAttribute("user", user);
-		 */
 		model.addAttribute("adList", otrosAnuncios);
 
 		return "usuarios";
@@ -133,13 +120,114 @@ public class MainController {
 
 	/* ZONA DE USUARIO */
 
-	@GetMapping()
-	public String contactar(@RequestParam(value="id", required = true) String id, @ModelAttribute AdDTO adDTO, Model model) {
-		
-		
-		
-		return "";
+	/*
+	 * @GetMapping("/admin/update") public String updateUsuario(@RequestParam(name =
+	 * "user") String user, Model model) {
+	 * 
+	 * if (user == null) { return "redirect:/admin/usuarios/"; }
+	 * 
+	 * Optional<Usuario> usuario = userService.findUserById(Long.parseLong(user));
+	 * model.addAttribute("usuario", usuario.get());
+	 * 
+	 * return "updateUsuario"; }
+	 * 
+	 * @PostMapping("/admin/update") public String postUpdateUsuario(@ModelAttribute
+	 * UsuarioDTO user, Model model) {
+	 * 
+	 * userService.updateUsuario(user);
+	 * 
+	 * return "redirect:/admin"; }
+	 */
+	
+	@GetMapping("/contact")
+	public String userContact(@RequestParam(name = "ad") String ad, /* @ModelAttribute AdDTO adDTO, */ Model model) {
+
+//		AgreementDTO agDTO = new AgreementDTO();
+//		model.addAttribute("ag", agDTO);
+		Ad anuncio = adService.findById(Long.parseLong(ad));
+		Usuario usuario = userService.findUserById(anuncio.getUsuario().getId()).get();
+		model.addAttribute("anuncio", anuncio);
+		model.addAttribute("nombre", anuncio.getTitle());
+		model.addAttribute("usuario", usuario);
+
+		return "contact";
 	}
+
+//	@PostMapping("/contact")
+//	public String userContactPost(/* @RequestParam(name="Ad") String ad, */@ModelAttribute AgreementDTO ag,
+//			Model model) {
+//
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+//		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+//		Usuario user = usuario.get();
+////		Ad anuncio = adService.findById(Long.parseLong(ad));
+//
+//		/*Reserva reservaBD = new Reserva();
+//		Optional<Clase> clase = claseService.findClaseById(reserva.getClase());
+//
+//		reservaBD.setClase(clase.get());
+//		reservaBD.setUsuario(usuario.get());
+//		reservaBD.setFecha(reserva.getFecha());
+//		reservaBD.setHora(reserva.getHora());
+//
+//		reservaBD = reservaService.insertReserva(reservaBD);*/
+//
+//		Agreement acuerdo = new Agreement();
+//		Ad anuncio = (Ad) model.getAttribute("anuncio");
+//		
+//		acuerdo.setComprador(user);
+//		acuerdo.setAd(anuncio);
+//
+//		agService.insertAgreement(acuerdo);
+//
+//		return "redirect:/";
+//	}
+
+//	@GetMapping("/contact")
+//	public String userContact(@RequestParam(name = "ad") String ad, /* @ModelAttribute AdDTO adDTO, */ Model model) {
+//
+//		AgreementDTO agDTO = new AgreementDTO();
+//		model.addAttribute("ag", agDTO);
+//		Ad anuncio = adService.findById(Long.parseLong(ad));
+//		model.addAttribute("anuncio", anuncio);
+//		model.addAttribute("nombre", anuncio.getTitle());
+//
+//		return "contact";
+//	}
+//
+//	@PostMapping("/contact")
+//	public String userContactPost(/* @RequestParam(name="Ad") String ad, */@ModelAttribute AgreementDTO ag,
+//			Model model) {
+//
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+//		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+//		Usuario user = usuario.get();
+////		Ad anuncio = adService.findById(Long.parseLong(ad));
+//
+//		/*Reserva reservaBD = new Reserva();
+//		Optional<Clase> clase = claseService.findClaseById(reserva.getClase());
+//
+//		reservaBD.setClase(clase.get());
+//		reservaBD.setUsuario(usuario.get());
+//		reservaBD.setFecha(reserva.getFecha());
+//		reservaBD.setHora(reserva.getHora());
+//
+//		reservaBD = reservaService.insertReserva(reservaBD);*/
+//
+//		Agreement acuerdo = new Agreement();
+//		Ad anuncio = (Ad) model.getAttribute("anuncio");
+//		
+//		acuerdo.setComprador(user);
+//		acuerdo.setAd(anuncio);
+//
+//		agService.insertAgreement(acuerdo);
+//
+//		return "redirect:/";
+//	}
+	
+
 
 	@GetMapping("/register")
 	public String registerGet(Model model) {

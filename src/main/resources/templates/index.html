@@ -18,74 +18,72 @@
 					<!--<input type="text" class="form-control" id="search" name="search" th:field="*{search}">
 					<input type="submit" class="btn btn-warning w-100 mt-3" value="BUSCAR" />-->
 
-					<form action="#" th:action="@{/}" th:object="${ad}"
-						method="get">
+					<form action="#" th:action="@{/}" th:object="${ad}" method="get">
 						<label for="title" class="form-label mt-3">Title</label>
 						<input type="text" class="form-control" id="title" name="title" th:field="*{title}">
-					<!--<label for="tipo" class="form-label mt-3">Tipo</label>
+						<!--<label for="tipo" class="form-label mt-3">Tipo</label>
 						<select name="tipo" class="form-select mt-3" th:field="*{tipo}">
 							<option th:value="'TODOS'" th:text="TODOS">TODOS</option>
 							<option th:value="'OFERTA'" th:text="OFERTA">OFERTA</option>
 							<option th:value="'DEMANDA'" th:text="DEMANDA">DEMANDA</option>
 						</select>-->
-					<input type="submit" class="btn btn-success w-100 mt-3 mb-5" value="BUSCAR" />
+						<input type="submit" class="btn btn-success w-100 mt-3 mb-5" value="BUSCAR" />
 					</form>
 
-					<div th:if="${anuncios.size}" th:each="ad : ${busqueda}">
-						<!--<div class="col-12">
-							<h2>Resultados "<span th:text="${busqueda}"></span>": </h2>
-						</div>-->
-						<div class="card" style="width: 18rem;">
-							<div th:text="${ad.title}" class="card-header"></div>
-							<ul class="list-group list-group-flush">
-								<li th:text="${ad.description}" class="list-group-item"></li>
-								<li th:text="${ad.tipo}" class="list-group-item"></li>
-								<li class="list-group-item"></li>
-								<li class="btn btn-primary">Contactar</li>
-							</ul>
+					<div th:if="${busqueda.size>=1}">
+						<div class="col-12">
+							<h2>Resultados de "<span th:text="${title}"></span>": </h2>
+						</div>
+						<div th:each="ad : ${busqueda}">
+							<!--th:if="${busqueda.size>=1}"-->
+							<div class="card col-3" style="width: 18rem;">
+								<div th:text="${ad.title}" class="card-header"></div>
+								<ul class="list-group list-group-flush">
+									<li th:text="${ad.description}" class="list-group-item"></li>
+									<li th:text="${ad.tipo}" class="list-group-item"></li>
+									<li class="list-group-item"></li>
+									<li class="btn btn-primary"><a th:href="@{/contact(ad=${ad.getIdAd()})}"
+											class="nav-link text-white">Contactar</a></li>
+									<!--<li class="btn btn-primary">-->
+									<!--<li>
+										<form action="#" th:action="@{/contact}" th:object="${ag}" method="post">
+											<input type="submit" class="btn btn-primary w-100 mt-3" value="Contactar" />
+											<!--<a th:href="@{/contact(ad=${ad.getIdAd()})}"
+											class="nav-link text-white">Contactar</a></li>-->
+										<!--</form>
+									</li>-->
+								</ul>
+							</div>
 						</div>
 					</div>
-					<div th:unless="${anuncios.size}" th:each="ad : ${anuncios}">
-						<!--<div class="col-12">
-							<h2>No hay resultados de "<span th:text="${busqueda}"></span>"</h2>
-						</div>-->
-						<div class="card" style="width: 18rem;">
-							<div th:text="${ad.title}" class="card-header"></div>
-							<ul class="list-group list-group-flush">
-								<li th:text="${ad.description}" class="list-group-item"></li>
-								<li th:text="${ad.tipo}" class="list-group-item"></li>
-								<li class="list-group-item"></li>
-								<li class="btn btn-primary">Contactar</li>
-							</ul>
+					<div th:unless="${busqueda.size>=1}">
+						<div th:if="${title != null}" class="col-12">
+							<h2>No hay resultados de "<span th:text="${title}"></span>"</h2>
+						</div>
+						<div th:if="${title==null}" th:each="ad : ${anuncios}">
+							<!--th:unless="${busqueda.size>=1}"-->
+							<div class="card col-3" style="width: 18rem;">
+								<div th:text="${ad.title}" class="card-header"></div>
+								<ul class="list-group list-group-flush">
+									<li th:text="${ad.description}" class="list-group-item"></li>
+									<li th:text="${ad.tipo}" class="list-group-item"></li>
+									<li class="list-group-item"></li>
+									<li class="btn btn-primary"><a th:href="@{/contact(ad=${ad.getIdAd()})}"
+											class="nav-link text-white">Contactar</a></li>
+									<!--<li class="btn btn-primary">-->
+									<!--<li class="list-group-item">
+										<form action="#" th:action="@{/contact}" th:object="${ag}" method="get">
+											<input type="submit" class="btn btn-primary w-100 mt-3"
+												value="Contactar" />
+											<!--<a th:href="@{/contact(ad=${ad.getIdAd()})}"
+											class="nav-link text-white">Contactar</a></li>-->
+									<!--</form>
+									</li>-->
+								</ul>
+							</div>
 						</div>
 					</div>
 
-
-					<!--<div class="card" style="width: 18rem;">
-						<div class="card-header"></div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Cras justo odio</li>
-							<li class="list-group-item">Dapibus ac facilisis in</li>
-							<li class="list-group-item">Vestibulum at eros</li>
-						</ul>
-					</div>-->
-					<!--<p th:text="${ads.title}"></p>-->
-					<!--<tr th:each="ad : ${ads}">
-						<td th:text="${ad.title}" />
-						<td th:text="${ad.description}" />
-					</tr>-->
-					<!-- Tabla que muestra todos los anuncios sin filtro -->
-					<!--<span th:each="ad : ${ads}">
-						<div class="card" style="width: 18rem;">
-							<div th:text="${ad.title}" class="card-header"></div>
-							<ul class="list-group list-group-flush">
-								<li th:text="${ad.description}" class="list-group-item"></li>
-								<li th:text="${ad.tipo}" class="list-group-item"></li>
-								<li class="list-group-item"></li>
-								<li class="btn btn-primary">Contactar</li>
-							</ul>
-						</div>
-					</span>-->
 				</div>
 				<div sec:authorize="hasRole('ROLE_ADMIN')">
 					<!--<img src="/img/inicio_admin.png" class="img-fluid mx-auto d-block" alt="Imagen de admin" />-->

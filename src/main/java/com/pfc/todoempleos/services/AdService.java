@@ -9,6 +9,7 @@ public interface AdService {
 	public List<Ad> getAds();
 	public Ad insertAd(Ad ad);
 	public List<Ad> findByTitle(String title);
+	public Ad findById(Long id);
 //	public List<Ad> findByTitle(String q) throws Exception;
 	
 }

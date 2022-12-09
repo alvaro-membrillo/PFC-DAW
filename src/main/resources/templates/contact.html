@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/bootstrap::head(title='Contactar con anunciante')"></head>
+
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<h2>Anuncio seleccionado: <span th:text="${nombre}"></span></h2>
+			</div>
+
+			<div class="col-8 mt-3">
+				<h1 class="text-center">Usuario anunciante</h1>
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>username</th>
+							<th>email</th>
+							<th>Nombre</th>
+							<th>Apellidos</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="${usuario.getUserName()}"></td>
+							<td th:text="${usuario.getEmail()}"></td>
+							<td th:text="${usuario.getFirstName()}"></td>
+							<td th:text="${usuario.getLastName()}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<a th:href="@{/}" class="btn btn-success">Volver al inicio</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

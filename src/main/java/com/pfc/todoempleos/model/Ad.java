@@ -28,7 +28,7 @@ public class Ad implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "seq_ad")
 	// @SequenceGenerator(name = "seq_ad", allocationSize = 5)
-	private int idAd;
+	private Long idAd;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "date", nullable = false)
@@ -50,11 +50,11 @@ public class Ad implements Serializable {
 		super();
 	}
 
-	public int getIdAd() {
+	public Long getIdAd() {
 		return idAd;
 	}
 
-	public void setIdAd(int idAd) {
+	public void setIdAd(Long idAd) {
 		this.idAd = idAd;
 	}
 

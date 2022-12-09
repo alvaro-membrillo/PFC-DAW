@@ -37,6 +37,12 @@ public class AdServiceImpl implements AdService {
 		
 		return adRepo.findAdByTitle(title);
 	}
+
+	@Override
+	public Ad findById(Long id) {
+		
+		return adRepo.findById(id).get();
+	}
 	
 
 //	@Override
