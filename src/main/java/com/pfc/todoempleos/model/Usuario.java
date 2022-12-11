@@ -44,6 +44,9 @@ public class Usuario implements Serializable {
 	@Column(name = "lastname", nullable = false)
 	private String lastName;
 
+//	@Column(name = "phone", nullable = true)
+//	private int phone;
+
 	@Column(name = "role", nullable = false)
 	private String role;
 
@@ -141,6 +144,14 @@ public class Usuario implements Serializable {
 	public void setAnuncios(List<Ad> anuncios) {
 		this.anuncios = anuncios;
 	}
+
+//	public int getPhone() {
+//		return phone;
+//	}
+//
+//	public void setPhone(int phone) {
+//		this.phone = phone;
+//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

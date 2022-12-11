@@ -29,8 +29,13 @@
 							class="nav-link text-white"
 							aria-current="page"
 							href="/"
+						><img style="width: 30px;" src="img/TodoEmpleos_logoDarkRound.png" alt="Logo"></a>
+						<!--<a
+							class="nav-link text-white"
+							aria-current="page"
+							href="/"
 							th:text="#{menu.home}"
-						></a>
+						><img src="img/TodoEmpleos_logoDarkRound.png" alt="Logo"></a>-->
 					</li>
 
 					<li sec:authorize="!isAuthenticated()" class="nav-item">
@@ -40,30 +45,7 @@
 							th:text="#{menu.login}"
 						></a>
 					</li>
-
-					<!--<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores}" th:text="#{menu.teachers}"></a></li>-->
-
-					<!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
-					class="nav-link text-white" th:href="@{/profesores/addProfesor}">Añadir
-						profesor</a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
-					class="nav-link text-white" th:href="@{/profesores/addAsignatura}">Asignar
-						asignaturas</a></li>-->
-
-					<!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/departments}" th:text="#{menu.departments}"></a></li>
-				
-				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/departments/add}" th:text="#{menu.adddpto}"></a></li>
-				
-				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/asignaturas/}" th:text="#{menu.subject}"></a></li>
-				
-				<li sec:authorize="hasRole('ROLE_USER')" class="nav-item"><a class="nav-link text-white " th:href="@{/alumnos/}" th:text="#{menu.students}"></a></li>			
-				
-				<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white " th:href="@{/grados}" th:text="Grados"></a></li>
-				
-				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white " th:href="@{/grados/addGrado}"  th:text="|Añadir Grados|"></a></li>
-				
-				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white " th:href="@{/grados/addAsignatura}"  th:text="|Añadir asignatura a grado|"></a></li>-->
-
+					
 					<!--<div th:fragment="addAd">-->
 					<span sec:authorize="isAuthenticated()" class="nav-item">
 						<!--<li th:if="${adList}" class="nav-item">-->

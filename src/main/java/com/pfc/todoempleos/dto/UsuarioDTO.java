@@ -17,6 +17,7 @@ public class UsuarioDTO {
 	private String firstName;
 	private String lastName;
 	private String role;
+//	private int phone;
 	private boolean activo;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
@@ -97,5 +98,13 @@ public class UsuarioDTO {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
+
+//	public int getPhone() {
+//		return phone;
+//	}
+//
+//	public void setPhone(int phone) {
+//		this.phone = phone;
+//	}
 
 }

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -150,6 +149,7 @@ public class MainController {
 		userBD.setEmail(usuario.getEmail());
 		userBD.setFirstName(usuario.getFirstName());
 		userBD.setLastName(usuario.getLastName());
+		/*userBD.setPhone(usuario.getPhone());*/
 		userBD.setRole("ROLE_USER");
 		userBD.setActivo(true);
 		userBD.setBirthDate(usuario.getBirthDate());
