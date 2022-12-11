@@ -4,48 +4,53 @@
 	src="https://kit.fontawesome.com/1fdd1e07ea.js"
 	crossorigin="anonymous"
 ></script>
-<nav th:fragment="menu" class="barra navbar navbar-expand-lg navbar-light">
-	<div class="container-fluid" style="background-color: black">
-		<button
-			class="navbar-toggler"
-			type="button"
-			data-bs-toggle="collapse"
-			data-bs-target="#navbarNav"
-			aria-controls="navbarNav"
-			aria-expanded="false"
-			aria-label="Toggle navigation"
-		>
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a
-						class="nav-link text-white"
-						aria-current="page"
-						href="/"
-						th:text="#{menu.home}"
-					></a>
-				</li>
+<!--<div class="container-fluid col-12 ml-0 mr-0">-->
+	<!--<div class="row justify-content-center">-->
+	<nav
+		th:fragment="menu"
+		class="barra container-fluid col-12 ml-0 mr-0 navbar navbar-expand-lg navbar-light"
+	>
+		<div class="container-fluid" style="background-color: black">
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-bs-toggle="collapse"
+				data-bs-target="#navbarNav"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a
+							class="nav-link text-white"
+							aria-current="page"
+							href="/"
+							th:text="#{menu.home}"
+						></a>
+					</li>
 
-				<li sec:authorize="!isAuthenticated()" class="nav-item">
-					<a
-						class="nav-link text-white"
-						th:href="@{/login}"
-						th:text="#{menu.login}"
-					></a>
-				</li>
+					<li sec:authorize="!isAuthenticated()" class="nav-item">
+						<a
+							class="nav-link text-white"
+							th:href="@{/login}"
+							th:text="#{menu.login}"
+						></a>
+					</li>
 
-				<!--<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores}" th:text="#{menu.teachers}"></a></li>-->
+					<!--<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/profesores}" th:text="#{menu.teachers}"></a></li>-->
 
-				<!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
+					<!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
 					class="nav-link text-white" th:href="@{/profesores/addProfesor}">Añadir
 						profesor</a></li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
 					class="nav-link text-white" th:href="@{/profesores/addAsignatura}">Asignar
 						asignaturas</a></li>-->
 
-				<!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/departments}" th:text="#{menu.departments}"></a></li>
+					<!--<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/departments}" th:text="#{menu.departments}"></a></li>
 				
 				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/departments/add}" th:text="#{menu.adddpto}"></a></li>
 				
@@ -59,56 +64,58 @@
 				
 				<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white " th:href="@{/grados/addAsignatura}"  th:text="|Añadir asignatura a grado|"></a></li>-->
 
-				<!--<div th:fragment="addAd">-->
-				<span sec:authorize="isAuthenticated()" class="nav-item">
-					<!--<li th:if="${adList}" class="nav-item">-->
-					<a th:href="@{/ads}" class="btn btn-primary"
-						>Lista de anuncios subidos</a
-					>
-					<!--</li>-->
-					<!--<a
+					<!--<div th:fragment="addAd">-->
+					<span sec:authorize="isAuthenticated()" class="nav-item">
+						<!--<li th:if="${adList}" class="nav-item">-->
+						<a th:href="@{/ads}" class="btn btn-primary"
+							>Lista de anuncios subidos</a
+						>
+						<!--</li>-->
+						<!--<a
 		class="nav-link text-white"
 		th:href="@{/register}"
 		th:text="#{menu.register}"
 	></a>-->
-					<!--<button title="Añadir anuncio" type="button" class="btn btn-info">-->
-					<a th:href="@{/addAd}" class="btn btn-info">+</a>
-					<!--</button>-->
-					<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-						<a class="nav-link text-white" th:href="@{/admin}"
-							>Panel de Administrador</a
-						>
-					</li>
-					<!--<li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+						<!--<button title="Añadir anuncio" type="button" class="btn btn-info">-->
+						<a th:href="@{/addAd}" class="btn btn-info">+</a>
+						<!--</button>-->
+						<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+							<a class="nav-link text-white" th:href="@{/admin}"
+								>Panel de Administrador</a
+							>
+						</li>
+						<!--<li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
 						<a class="nav-link text-white" th:href="@{/ads}"
 							>Panel de Usuario</a
 						>
 					</li>-->
-				</span>
-				<!--</div>-->
+					</span>
+					<!--</div>-->
 
-				<li sec:authorize="isAuthenticated()" class="nav-item">
-					<a class="nav-link text-white" th:href="@{/logout}"
-						><i class="bi bi-box-arrow-left"></i
-					></a>
-				</li>
+					<li sec:authorize="isAuthenticated()" class="nav-item">
+						<a class="nav-link text-white" th:href="@{/logout}"
+							><i class="bi bi-box-arrow-left"></i
+						></a>
+					</li>
 
-				<li sec:authorize="!isAuthenticated()" class="nav-item">
-					<a
-						class="nav-link text-white"
-						th:href="@{/register}"
-						th:text="#{menu.register}"
-					></a>
-				</li>
-			</ul>
+					<li sec:authorize="!isAuthenticated()" class="nav-item">
+						<a
+							class="nav-link text-white"
+							th:href="@{/register}"
+							th:text="#{menu.register}"
+						></a>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
 
-<footer
-	th:fragment="footer(info)"
-	class="mt-5"
-	style="background-color: black; color: white"
->
-	<!--<h1 class="text-center text-center" th:text="#{${info}}"></h1>-->
-</footer>
+	<footer
+		th:fragment="footer(info)"
+		class="mt-5"
+		style="background-color: black; color: white"
+	>
+		<!--<h1 class="text-center text-center" th:text="#{${info}}"></h1>-->
+		<a href="https://www.instagram.com/"> <img style="width: 30px;" src="img/insta.png" alt=""></a>
+	</footer>
+</div>
