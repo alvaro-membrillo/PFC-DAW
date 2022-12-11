@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pfc.todoempleos.dto.AdDTO;
-import com.pfc.todoempleos.dto.AgreementDTO;
 import com.pfc.todoempleos.dto.UsuarioDTO;
 import com.pfc.todoempleos.model.Ad;
-import com.pfc.todoempleos.model.Agreement;
 import com.pfc.todoempleos.model.Usuario;
 import com.pfc.todoempleos.services.AdServiceImpl;
 import com.pfc.todoempleos.services.AgreementServiceImpl;
@@ -120,30 +119,11 @@ public class MainController {
 
 	/* ZONA DE USUARIO */
 
-	/*
-	 * @GetMapping("/admin/update") public String updateUsuario(@RequestParam(name =
-	 * "user") String user, Model model) {
-	 * 
-	 * if (user == null) { return "redirect:/admin/usuarios/"; }
-	 * 
-	 * Optional<Usuario> usuario = userService.findUserById(Long.parseLong(user));
-	 * model.addAttribute("usuario", usuario.get());
-	 * 
-	 * return "updateUsuario"; }
-	 * 
-	 * @PostMapping("/admin/update") public String postUpdateUsuario(@ModelAttribute
-	 * UsuarioDTO user, Model model) {
-	 * 
-	 * userService.updateUsuario(user);
-	 * 
-	 * return "redirect:/admin"; }
-	 */
-	
 	@GetMapping("/contact")
 	public String userContact(@RequestParam(name = "ad") String ad, /* @ModelAttribute AdDTO adDTO, */ Model model) {
 
-//		AgreementDTO agDTO = new AgreementDTO();
-//		model.addAttribute("ag", agDTO);
+		// AgreementDTO agDTO = new AgreementDTO();
+		// model.addAttribute("ag", agDTO);
 		Ad anuncio = adService.findById(Long.parseLong(ad));
 		Usuario usuario = userService.findUserById(anuncio.getUsuario().getId()).get();
 		model.addAttribute("anuncio", anuncio);
@@ -152,82 +132,6 @@ public class MainController {
 
 		return "contact";
 	}
-
-//	@PostMapping("/contact")
-//	public String userContactPost(/* @RequestParam(name="Ad") String ad, */@ModelAttribute AgreementDTO ag,
-//			Model model) {
-//
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-//		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
-//		Usuario user = usuario.get();
-////		Ad anuncio = adService.findById(Long.parseLong(ad));
-//
-//		/*Reserva reservaBD = new Reserva();
-//		Optional<Clase> clase = claseService.findClaseById(reserva.getClase());
-//
-//		reservaBD.setClase(clase.get());
-//		reservaBD.setUsuario(usuario.get());
-//		reservaBD.setFecha(reserva.getFecha());
-//		reservaBD.setHora(reserva.getHora());
-//
-//		reservaBD = reservaService.insertReserva(reservaBD);*/
-//
-//		Agreement acuerdo = new Agreement();
-//		Ad anuncio = (Ad) model.getAttribute("anuncio");
-//		
-//		acuerdo.setComprador(user);
-//		acuerdo.setAd(anuncio);
-//
-//		agService.insertAgreement(acuerdo);
-//
-//		return "redirect:/";
-//	}
-
-//	@GetMapping("/contact")
-//	public String userContact(@RequestParam(name = "ad") String ad, /* @ModelAttribute AdDTO adDTO, */ Model model) {
-//
-//		AgreementDTO agDTO = new AgreementDTO();
-//		model.addAttribute("ag", agDTO);
-//		Ad anuncio = adService.findById(Long.parseLong(ad));
-//		model.addAttribute("anuncio", anuncio);
-//		model.addAttribute("nombre", anuncio.getTitle());
-//
-//		return "contact";
-//	}
-//
-//	@PostMapping("/contact")
-//	public String userContactPost(/* @RequestParam(name="Ad") String ad, */@ModelAttribute AgreementDTO ag,
-//			Model model) {
-//
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		UserDetails userDetail = (UserDetails) auth.getPrincipal();
-//		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
-//		Usuario user = usuario.get();
-////		Ad anuncio = adService.findById(Long.parseLong(ad));
-//
-//		/*Reserva reservaBD = new Reserva();
-//		Optional<Clase> clase = claseService.findClaseById(reserva.getClase());
-//
-//		reservaBD.setClase(clase.get());
-//		reservaBD.setUsuario(usuario.get());
-//		reservaBD.setFecha(reserva.getFecha());
-//		reservaBD.setHora(reserva.getHora());
-//
-//		reservaBD = reservaService.insertReserva(reservaBD);*/
-//
-//		Agreement acuerdo = new Agreement();
-//		Ad anuncio = (Ad) model.getAttribute("anuncio");
-//		
-//		acuerdo.setComprador(user);
-//		acuerdo.setAd(anuncio);
-//
-//		agService.insertAgreement(acuerdo);
-//
-//		return "redirect:/";
-//	}
-	
-
 
 	@GetMapping("/register")
 	public String registerGet(Model model) {
@@ -291,6 +195,59 @@ public class MainController {
 		}
 
 		return "redirect:/";
+	}
+
+	@GetMapping("/ads")
+	public String adList(Model model) {
+
+		model.addAttribute("anuncios", adService.getAds());
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		UserDetails userDetail = (UserDetails) auth.getPrincipal();
+		Optional<Usuario> usuario = userService.getUserByName(userDetail.getUsername());
+		Usuario user = usuario.get();
+
+		List<Ad> listaAnuncios = adService.getAds();
+		List<Ad> otrosAnuncios = new ArrayList<>();
+
+		for (Ad ad : listaAnuncios) {
+			if (ad.getUsuario().getId() == user.getId()) {
+				otrosAnuncios.add(ad);
+			}
+		}
+
+		model.addAttribute("adList", otrosAnuncios);
+
+		return "anuncios";
+	}
+
+	@GetMapping("/ads/update")
+	public String updateAnuncio(@RequestParam(name = "id") String id, Model model) {
+
+		if (id == null) {
+			return "redirect:/ads";
+		}
+
+		Ad anuncio = adService.findById(Long.parseLong(id));
+		model.addAttribute("anuncio", anuncio);
+
+		return "updateAnuncio";
+	}
+
+	@PostMapping("/ads/update")
+	public String postUpdateAnuncio(@ModelAttribute AdDTO ad, Model model) {
+
+		adService.updateAd(ad);
+
+		return "redirect:/ads";
+	}
+	
+	@RequestMapping("/ads/delete")
+	public String adsDelete(@RequestParam(name = "id") String id, Model model) {
+
+		adService.deleteAd(Long.parseLong(id));
+
+		return "redirect:/ads";
 	}
 
 }

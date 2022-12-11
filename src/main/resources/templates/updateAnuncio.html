@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Editar anuncio')"></head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-6">
+				<form action="#" th:action="@{/ads/update}" th:object="${anuncio}" method="post">
+					<label for="id" class="form-label mt-3">Id</label>
+    				<input type="text" class="form-control" id="id" name="id" th:field="*{idAd}" readonly>
+					<label for="title" class="form-label mt-3">Titulo</label>
+    				<input type="text" class="form-control" id="title" name="title" th:field="*{title}" required >	
+    				<label for="description" class="form-label mt-3">Descripción</label>
+    				<input type="text" class="form-control" id="description" name="description" th:field="*{description}" required >
+    				<label for="prize" class="form-label mt-3">Precio</label>
+    				<input type="number" class="form-control" id="prize" name="prize" th:field="*{price}" required >
+    				<label for="usuario" class="form-label mt-3">Usuario</label>
+    				<input type="text" class="form-control" id="usuario" name="usuario" th:field="*{usuario}" readonly>
+    				
+    				<label for="date" class="form-label mt-3">Date</label>
+    				<input type="date" class="form-control" id="date" name="date" th:field="*{date}" readonly>
+    				
+    				<label for="tipo" class="form-label mt-3">Tipo</label>
+    				<!--<div th:if="${usuario.role=='ROLE_USUARIO'}">-->
+    				<select name="tipo" class="form-select mt-3"  th:field="*{tipo}">
+	                    	<option th:value="'OFERTA'" th:text="OFERTA">OFERTA</option>
+	                    	<option th:value="'DEMANDA'" th:text="DEMANDA">DEMANDA</option>
+                    </select>
+    				<!--<input type="text" class="form-control" id="role" name="role" th:field="*{role}" required>-->
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />
+				</form>
+			</div>		
+		</div>
+	</div>
+</body>
+</html>

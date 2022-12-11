@@ -1,15 +1,45 @@
 package com.pfc.todoempleos.dto;
 
+import java.util.Date;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.pfc.todoempleos.model.Usuario;
+
 public class AdDTO {
 
+	private Long idAd;
 	private String title;
 	private String description;
 	private double price;
-	private Long idVendedor;
+	private Usuario usuario;
 	private String tipo;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date date;
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public AdDTO() {
 		super();
+	}
+
+	public Long getIdAd() {
+		return idAd;
+	}
+
+	public void setIdAd(Long idAd) {
+		this.idAd = idAd;
 	}
 
 	public String getTitle() {
@@ -36,12 +66,12 @@ public class AdDTO {
 		this.price = price;
 	}
 
-	public Long getIdVendedor() {
-		return idVendedor;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdVendedor(Long idVendedor) {
-		this.idVendedor = idVendedor;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getTipo() {

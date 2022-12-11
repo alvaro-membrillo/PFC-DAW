@@ -9,5 +9,6 @@ import com.pfc.todoempleos.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	public Usuario findByUserName(String userName);
+	public Usuario findByEmail(Usuario usuario);
 	
 }

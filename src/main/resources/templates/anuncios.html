@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/bootstrap::head(title='Usuarios')"></head>
+
+	<body>
+		<div class="container mt-5">
+			<div class="row mt-5 justify-content-center">
+				<header th:insert="fragments/parts::menu"></header>
+				<div class="col-8">
+					<div th:if="${adList}">
+						<h1 class="text-center">Lista de Anuncios</h1>
+						<table class="table table-stripped table-hover">
+							<thead class="table-light">
+								<tr>
+									<th>ID</th>
+									<th>Titulo</th>
+									<th>descripción</th>
+									<th>Fecha de publicación</th>
+									<th>Precio</th>
+									<th>Tipo</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="a : ${adList}">
+									<td th:text="${a.getIdAd()}"></td>
+									<td th:text="${a.getTitle()}"></td>
+									<td th:text="${a.getDescription()}"></td>
+									<td th:text="${a.getDate()}"></td>
+									<td th:text="${a.getPrice()}"></td>
+									<td th:text="${a.getTipo()}"></td>
+									<td>
+										<a th:href="@{'/ads/update?id='+${a.getIdAd()}}"
+											><i class="bi bi-pencil-fill"></i
+										></a>
+										<a th:href="@{'/ads/delete?id='+${a.getIdAd()}}"
+											><i class="bi bi-trash-fill"></i
+										></a>
+									</td>
+									<!--<td><a th:href="@{/admin/update(user=${u.getId()})}" class="btn btn-info">Editar</a></td>-->
+									<td>
+										<!--<a th:href="@{/admin/delete(user=${u.getId()})}" class="btn btn-danger">Eliminar</a></td>-->
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div th:unless="${adList}">
+						Ahora mismo no tiene ningún anuncio subido
+					</div>
+				</div>
+
+				<!--<footer th:replace="fragments/parts::footer(info='menu.students')"></footer>-->
+			</div>
+		</div>
+	</body>
+</html>

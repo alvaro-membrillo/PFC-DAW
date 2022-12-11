@@ -24,8 +24,8 @@
     				
     				<!--<div th:if="${usuario.role=='ROLE_USUARIO'}">-->
     				<select name="role" class="form-select mt-3"  th:field="*{role}">
-	                    	<option th:value="'ROLE_USUARIO'" th:text="USUARIO">USUARIO</option>
-	                    	<option th:value="'ROLE_ADMIN'" th:text="ADMIN">ADMIN</option>
+	                    	<option th:value="'USUARIO'" th:text="USUARIO">USUARIO</option>
+	                    	<option th:value="'ADMIN'" th:text="ADMIN">ADMIN</option>
                     </select>
     				<!--<input type="text" class="form-control" id="role" name="role" th:field="*{role}" required>-->
     				<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />

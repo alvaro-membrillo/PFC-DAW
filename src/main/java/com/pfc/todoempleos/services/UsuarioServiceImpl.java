@@ -25,8 +25,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario insertUsuario(Usuario usuario) {
-
-		if (usuario != null) {
+		
+		if (usuario != null || userRepo.findByEmail(usuario).getEmail() != usuario.getEmail()) {
 
 			return userRepo.save(usuario);
 		}
@@ -77,7 +77,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario updateUsuario(UsuarioDTO usuario) {
 
 		if (usuario == null || usuario.getId() == null || usuario.getUserName() == null
-				|| usuario.getFirstName() == null || usuario.getLastName() == null || usuario.getEmail() == null
+				|| usuario.getFirstName() == null || usuario.getLastName() == null || usuario.getEmail() == userRepo.findByUserName(usuario.getEmail()).getEmail() || usuario.getEmail() == null
 				|| usuario.getPassword() == null) {
 			return null;
 		}

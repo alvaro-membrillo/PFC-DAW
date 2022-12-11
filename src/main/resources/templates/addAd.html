@@ -11,7 +11,7 @@
 				<form action="#" th:action="@{/addAd}" th:object="${ad}" method="post">
 					<label for="usuario" class="form-label mt-3">Title</label>
     				<input type="text" class="form-control" id="title" name="userName" th:field="*{title}" required >	
-    				<label for="nombre" class="form-label mt-3">Descripciï¿½n</label>
+    				<label for="nombre" class="form-label mt-3">DescripciÃ³n</label>
     				<div class="form-outline">
 					  <textarea th:field="*{description}" class="form-control" id="descripcion" rows="4"></textarea>
 					</div>
@@ -22,7 +22,7 @@
     					<option th:value="'OFERTA'" th:text="OFERTA">OFERTA</option>
     					<option th:value="'DEMANDA'" th:text="DEMANDA">DEMANDA</option>
     				</select>
-    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Añadir" />
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="Aï¿½adir" />
 				</form>
 			</div>		
 		</div>

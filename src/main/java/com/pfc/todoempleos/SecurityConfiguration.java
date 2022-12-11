@@ -20,20 +20,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	
-	/* Obtengo una refencia al SINGLENTON del userDetailsService	 * 
+	/*
+	 * Obtengo una refencia al SINGLENTON del userDetailsService *
 	 */
 	@Autowired
 	JPAUserDetailsService userDetailsService;
-	
+
 	/* MÉTODO PARA AUTENTIFICAR LOS USUARIOS */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		//La autentificación JPA no está incluido tenemos que configurarla nosotros
-		//Creando nuestro propio servicio que nos permita obtener la información del usuario
+		// La autentificación JPA no está incluido tenemos que configurarla nosotros
+		// Creando nuestro propio servicio que nos permita obtener la información del
+		// usuario
 		auth.userDetailsService(userDetailsService);
 	}
 
@@ -42,24 +43,41 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	 */
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
-		/* URL con información sobre ANT MATCHERS
-		 * https://www.baeldung.com/spring-security-expressions */
+
+		/*
+		 * URL con información sobre ANT MATCHERS
+		 * https://www.baeldung.com/spring-security-expressions
+		 */
 		http.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.antMatchers("/departments","/asignaturas/*","/departments/*","/profesores/addProfesor").hasRole("ADMIN")
-		.antMatchers("/about","/services","/alumnos/*").hasRole("USER")
-		.antMatchers("/register").not().authenticated()
-		.and()
-		.formLogin();		
+				.antMatchers("/").permitAll()
+				.antMatchers("/register").not().authenticated()
+				.antMatchers("/admin", "/admin/*").hasRole("ADMIN")
+				.antMatchers("/user", "/user/*", "/ads").hasRole("USER")
+				.and()
+				.formLogin();
+
+		/*
+		 * URL con información sobre ANT MATCHERS
+		 * https://www.baeldung.com/spring-security-expressions
+		 */
+		http.authorizeRequests()
+				.antMatchers("/").permitAll()
+				// .antMatchers("").hasRole("ADMIN")
+				.antMatchers("/register").not().authenticated()
+				.antMatchers(
+						"/admin/clientes, /admin/clientes/update, admin/clases/, admin/clases/add, admin/clases/update")
+				.hasRole("ADMIN")
+				.antMatchers("/cliente/calendario, cliente/info").hasRole("USER")
+				.and()
+				.formLogin();
 	}
-	
+
 	/*
 	 * ESTABLECEMOS EL PASSWORD ENCODER. FUERZA 15 (de 4 a 31)
 	 */
 	@Bean
-    public PasswordEncoder getPasswordEncoder() {         
+	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder(15);
-    }
-	
+	}
+
 }
