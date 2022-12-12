@@ -34,12 +34,9 @@
 	</style>
 
 	<body>
-		<!--<div class="container-fluid col-12 ml-0 mr-0">
-			<div class="row justify-content-center">-->
 		<header th:insert="fragments/parts::menu"></header>
 		<div class="col-10 justify-content-center mt-5 mb-5 ml-1">
 			<div sec:authorize="!isAuthenticated()">
-				<!--<img src="/img/background.png" class="img-fluid mx-auto d-block">-->
 				<h3 class="container-fluid text-center mb-3">
 					El mayor portal de empleo para autónomos
 				</h3>
@@ -77,9 +74,6 @@
 				</div>
 			</div>
 			<div sec:authorize="isAuthenticated()">
-				<!--<input type="text" class="form-control" id="search" name="search" th:field="*{search}">
-					<input type="submit" class="btn btn-warning w-100 mt-3" value="BUSCAR" />-->
-
 				<form action="#" th:action="@{/}" th:object="${ad}" method="get">
 					<label for="title" class="form-label mt-3">Title</label>
 					<input
@@ -89,12 +83,6 @@
 						name="title"
 						th:field="*{title}"
 					/>
-					<!--<label for="tipo" class="form-label mt-3">Tipo</label>
-						<select name="tipo" class="form-select mt-3" th:field="*{tipo}">
-							<option th:value="'TODOS'" th:text="TODOS">TODOS</option>
-							<option th:value="'OFERTA'" th:text="OFERTA">OFERTA</option>
-							<option th:value="'DEMANDA'" th:text="DEMANDA">DEMANDA</option>
-						</select>-->
 					<input
 						type="submit"
 						class="btn btn-success w-100 mt-3 mb-5"
@@ -107,7 +95,6 @@
 						<h2>Resultados de "<span th:text="${title}"></span>":</h2>
 					</div>
 					<div class="row justify-content-center" th:each="ad : ${busqueda}">
-						<!--th:if="${busqueda.size>=1}"-->
 						<div class="card col-3" style="width: 18rem">
 							<div th:text="${ad.title}" class="card-header"></div>
 							<ul class="list-group list-group-flush">
@@ -121,24 +108,15 @@
 										>Contactar</a
 									>
 								</li>
-								<!--<li class="btn btn-primary">-->
-								<!--<li>
-										<form action="#" th:action="@{/contact}" th:object="${ag}" method="post">
-											<input type="submit" class="btn btn-primary w-100 mt-3" value="Contactar" />
-											<!--<a th:href="@{/contact(ad=${ad.getIdAd()})}"
-											class="nav-link text-white">Contactar</a></li>-->
-								<!--</form>
-									</li>-->
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div th:unless="${busqueda.size>=1}">
-					<div th:if="${title != null}" class="col-12">
+					<div th:if="${title != null}" class="col-12 text-center">
 						<h2>No hay resultados de "<span th:text="${title}"></span>"</h2>
 					</div>
 					<div th:if="${title==null}" th:each="ad : ${anuncios}">
-						<!--th:unless="${busqueda.size>=1}"-->
 						<div class="card col-3" style="width: 18rem">
 							<div th:text="${ad.title}" class="card-header"></div>
 							<ul class="list-group list-group-flush">
@@ -152,15 +130,6 @@
 										>Contactar</a
 									>
 								</li>
-								<!--<li class="btn btn-primary">-->
-								<!--<li class="list-group-item">
-										<form action="#" th:action="@{/contact}" th:object="${ag}" method="get">
-											<input type="submit" class="btn btn-primary w-100 mt-3"
-												value="Contactar" />
-											<!--<a th:href="@{/contact(ad=${ad.getIdAd()})}"
-											class="nav-link text-white">Contactar</a></li>-->
-								<!--</form>
-									</li>-->
 							</ul>
 						</div>
 					</div>
